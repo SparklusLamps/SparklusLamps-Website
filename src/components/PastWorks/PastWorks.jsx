@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { pastWorks } from "../../constants";
@@ -10,6 +10,41 @@ const PastWorks = () => {
     threshold: 0.1,
   });
 
+  const scrollContainerRef = useRef(null);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  const autoScroll = () => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      const isAtEnd =
+        container.scrollLeft >=
+        container.scrollWidth - container.clientWidth - 10;
+
+      if (isAtEnd) {
+        // Reset to beginning
+        container.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        // Scroll to next
+        const scrollAmount = container.clientWidth;
+        container.scrollBy({
+          left: scrollAmount,
+          behavior: "smooth",
+        });
+      }
+    }
+  };
+
+  // Auto-scroll effect
+  React.useEffect(() => {
+    if (!isAutoPlaying || !inView) return;
+
+    const interval = setInterval(() => {
+      autoScroll();
+    }, 3000); // 3 seconds
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, inView]);
+
   return (
     <section id="works" className="section past-works-section">
       <div className="container">
@@ -19,44 +54,44 @@ const PastWorks = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2>Past Works</h2>
+          <h2>Our Projects</h2>
           <p className="section-subtitle">
-            Explore our portfolio of luxury lighting installations across the
-            globe
+            Explore our portfolio of Customized Luxury lighting installations
+            across the globe
           </p>
         </motion.div>
+      </div>
 
-        <motion.div
-          ref={ref}
-          className="works-grid"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
+      <motion.div
+        ref={ref}
+        className="carousel-wrapper-container"
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        onMouseEnter={() => setIsAutoPlaying(false)}
+        onMouseLeave={() => setIsAutoPlaying(true)}
+      >
+        <div className="works-carousel" ref={scrollContainerRef}>
           {pastWorks.map((work, index) => (
             <motion.div
               key={work.id}
-              className="work-card"
+              className="work-carousel-item"
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.03 }}
             >
-              <div className="work-image">
+              <div className="work-carousel-image">
                 <img src={work.image} alt={work.title} />
-                <div className="work-overlay">
-                  <span className="work-year">{work.year}</span>
+                <div className="work-carousel-overlay">
+                  <h3>{work.title}</h3>
+                  <p className="work-tagline">{work.location}</p>
                 </div>
-              </div>
-              <div className="work-content">
-                <h3>{work.title}</h3>
-                <p className="work-location">{work.location}</p>
-                <p className="work-description">{work.description}</p>
               </div>
             </motion.div>
           ))}
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 };

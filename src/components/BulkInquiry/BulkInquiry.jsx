@@ -55,7 +55,7 @@ const BulkInquiry = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="contact-icon">
+            <div className="contact-icon phone-icon">
               <FaPhone />
             </div>
             <h3>Call Us</h3>

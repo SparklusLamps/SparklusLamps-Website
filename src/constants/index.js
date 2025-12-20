@@ -2,7 +2,7 @@
 export const navLinks = [
   { id: "home", title: "HOME" },
   { id: "about", title: "OUR STORY" },
-  { id: "works", title: "WORKS" },
+  { id: "works", title: "OUR PROJECTS" },
   { id: "products", title: "PRODUCTS" },
   { id: "contact", title: "CONTACT" },
 ];
@@ -21,7 +21,7 @@ export const aboutContent = {
   title: "About Sparklus Lamps",
   ourStory: {
     heading: "Our Story",
-    image: "/images/our-story.jpg", // Add your image
+    image: "/SparklusLamps-Website/images/our-story.jpg",
     content:
       "Founded with a vision to revolutionize luxury lighting, Sparklus Lamps has been illuminating spaces with elegance and sophistication since our inception. Our journey began with a passion for creating lighting solutions that transcend mere functionality and become works of art.",
   },
@@ -41,52 +41,36 @@ export const aboutContent = {
 export const pastWorks = [
   {
     id: 1,
-    title: "The Grand Palace Hotel",
-    location: "Dubai, UAE",
+    title: "The Folded Geometry",
+    location: "London, U.K",
     description:
       "Luxury chandelier installation featuring custom crystal designs",
-    image: "/images/work1.jpg", // Add your images
+    image: "/SparklusLamps-Website/images/work1.jpg",
     year: "2024",
   },
   {
     id: 2,
-    title: "Skyline Residences",
-    location: "New York, USA",
+    title: "Solace Dome",
+    location: "Toronto,Canada",
     description:
-      "Modern pendant lighting system for high-end residential complex",
-    image: "/images/work2.jpg",
+      "Designed to soften your space, the Solace Dome Lamp features a sculptural dome silhouette handcrafted from cotton paper",
+    image: "/SparklusLamps-Website/images/work2.jpg",
     year: "2023",
   },
   {
     id: 3,
-    title: "Royal Opera House",
-    location: "London, UK",
+    title: "the Bends",
+    location: "Lucknow, India",
     description: "Bespoke theatrical lighting installation",
-    image: "/images/work3.jpg",
+    image: "/SparklusLamps-Website/images/work3.jpg",
     year: "2023",
   },
   {
     id: 4,
-    title: "Azure Marina",
-    location: "Monaco",
+    title: "Glowing Paper Petals",
+    location: "Hyderabad, India",
     description: "Waterfront property with custom LED ambience lighting",
-    image: "/images/work4.jpg",
-    year: "2024",
-  },
-  {
-    id: 5,
-    title: "Metropolitan Art Gallery",
-    location: "Paris, France",
-    description: "Sophisticated track lighting and accent illumination",
-    image: "/images/work5.jpg",
-    year: "2022",
-  },
-  {
-    id: 6,
-    title: "Platinum Corporate Tower",
-    location: "Singapore",
-    description: "Commercial office lighting with smart control systems",
-    image: "/images/work6.jpg",
+    image: "/SparklusLamps-Website/images/work4.jpg",
     year: "2024",
   },
 ];
@@ -123,81 +107,59 @@ export const statistics = [
 export const products = [
   {
     id: 1,
-    name: "Crystal Cascade Chandelier",
-    description: "Handcrafted crystal chandelier with LED integration",
-    price: "$12,999",
-    amazonLink: "https://amazon.com/product1",
+    name: "Golden Peacock Ridge",
+    description:
+      "Perfect blend of Antique Brass Finish Animal Figurine and Sustainable Paper Shade to elevate your Bedside Space.",
+    price: "",
+    amazonLink: "https://amzn.in/d/gYd6El6",
     images: [
-      "/images/product1-1.jpg",
-      "/images/product1-2.jpg",
-      "/images/product1-3.jpg",
+      "/SparklusLamps-Website/images/product1-1.jpg",
+      "/SparklusLamps-Website/images/product1-2.jpg",
+      "/SparklusLamps-Website/images/product1-3.jpg",
     ],
-    category: "Chandeliers",
+    category: "Table Lamp",
   },
   {
     id: 2,
-    name: "Modern Minimalist Pendant",
-    description: "Sleek pendant lamp with adjustable brightness",
-    price: "$1,299",
-    amazonLink: "https://amazon.com/product2",
+    name: "Golden Pleated Canopy",
+    description:
+      "Designed to add warmth and sophistication, this lamp features a hand-folded cotton paper shade to make your Living room start living again.",
+    price: "",
+    amazonLink: "https://amzn.in/d/i9ddgfK",
     images: [
-      "/images/product2-1.jpg",
-      "/images/product2-2.jpg",
-      "/images/product2-3.jpg",
+      "/SparklusLamps-Website/images/product2-1.jpg",
+      "/SparklusLamps-Website/images/product2-2.jpg",
+      "/SparklusLamps-Website/images/product2-3.jpg",
     ],
-    category: "Pendants",
+    category: "Floor Lamp",
   },
   {
     id: 3,
-    name: "Royal Sconce Collection",
-    description: "Elegant wall sconces with gold finish",
-    price: "$899",
-    amazonLink: "https://amazon.com/product3",
+    name: "Wavy Golden Umbrella ",
+    description:
+      "Inspired by mid-century modern aesthetics and timeless design, this Lamp elevates your living room or bedroom corner.",
+    price: "",
+    amazonLink: "https://amzn.in/d/eatMtxH",
     images: [
-      "/images/product3-1.jpg",
-      "/images/product3-2.jpg",
-      "/images/product3-3.jpg",
+      "/SparklusLamps-Website/images/product3-1.jpg",
+      "/SparklusLamps-Website/images/product3-2.jpg",
+      "/SparklusLamps-Website/images/product3-3.jpg",
     ],
-    category: "Wall Lights",
+    category: "Table Lamp",
   },
   {
     id: 4,
-    name: "Ambient Floor Lamp",
-    description: "Contemporary floor lamp with smart features",
-    price: "$2,499",
-    amazonLink: "https://amazon.com/product4",
+    name: "Foldable Book Lamp",
+    description:
+      "It Transform your space with a touch of magic. At first glance, it looks like a beautifully crafted hardcover book, but it transforms into a stunning sculptural light",
+    price: "",
+    amazonLink: "https://amzn.in/d/6mvZwLY",
     images: [
-      "/images/product4-1.jpg",
-      "/images/product4-2.jpg",
-      "/images/product4-3.jpg",
+      "/SparklusLamps-Website/images/product4-1.jpg",
+      "/SparklusLamps-Website/images/product4-2.jpg",
+      "/SparklusLamps-Website/images/product4-3.jpg",
     ],
-    category: "Floor Lamps",
-  },
-  {
-    id: 5,
-    name: "Designer Table Lamp",
-    description: "Artistic table lamp with touch controls",
-    price: "$799",
-    amazonLink: "https://amazon.com/product5",
-    images: [
-      "/images/product5-1.jpg",
-      "/images/product5-2.jpg",
-      "/images/product5-3.jpg",
-    ],
-    category: "Table Lamps",
-  },
-  {
-    id: 6,
-    name: "Outdoor Landscape Lighting",
-    description: "Weather-resistant outdoor lighting system",
-    price: "$3,499",
-    amazonLink: "https://amazon.com/product6",
-    images: [
-      "/images/product6-1.jpg",
-      "/images/product6-2.jpg",
-      "/images/product6-3.jpg",
-    ],
-    category: "Outdoor",
+    category: "Table Lamp",
   },
 ];
 
@@ -237,11 +199,12 @@ export const faqs = [
   {
     id: 6,
     question: "How do I maintain or clean my paper lamp?",
-    answer: "Simply dust it occasionally using a soft, dry cloth or air blower. Avoid moisture or harsh cleaners. The natural texture of the paper hides dust well and stays pristine with minimal care.",
+    answer:
+      "Simply dust it occasionally using a soft, dry cloth or air blower. Avoid moisture or harsh cleaners. The natural texture of the paper hides dust well and stays pristine with minimal care.",
   },
   {
     id: 7,
-    question: "Where are your lamps made?",
+    question: "Where are Sparklus Lamps products crafted?",
     answer:
       "Every Sparklus lamp is handcrafted in India, combining modern design with traditional paper-folding artistry. Each piece reflects hours of meticulous craftsmanship and attention to detail.",
   },
@@ -250,25 +213,23 @@ export const faqs = [
 // Company Contact Details
 export const companyDetails = {
   name: "Sparklus Lamps",
-  email: "sparkluslamps@gmail.com",
+  email: "contact@sparkluslamps.com",
   phone: "+91 95482 18100",
   address: {
-    street: "Tandon Bara",
+    street: "48, Tandon Bara, Biharipur",
     city: "Bareilly",
     state: "Uttar Pradesh",
-    zip: "",
+    zip: "243003",
     country: "India",
   },
   officeHours: {
-    weekdays: "Monday - Friday: 11:00 AM - 9:00 PM IST",
-    saturday: "Saturday: 10:00 AM - 4:00 PM IST",
+    weekdays: "Monday - Friday: 10:00 AM - 6:00 PM IST",
+    saturday: "Saturday: 11:00 AM - 5:00 PM IST",
     sunday: "Sunday: Closed",
   },
   socialMedia: {
-    facebook: "https://facebook.com/sparkluslamps",
     instagram: "https://instagram.com/sparkluslamps",
-    twitter: "https://twitter.com/sparkluslamps",
-    linkedin: "https://linkedin.com/company/sparkluslamps",
+    linkedin: "https://www.linkedin.com/in/LightUpWith-Ayush/",
     pinterest: "https://pin.it/2UZatPiAy",
   },
 };

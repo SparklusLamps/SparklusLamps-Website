@@ -25,12 +25,12 @@ const ReturnPolicy = () => {
 
         <section className="policy-section">
           <h2>2. Eligibility for Returns</h2>
-          <p>You may return items within 30 days of delivery if:</p>
+          <p>You may return items within 7 days of delivery if:</p>
           <ul>
             <li>The item is in its original condition and packaging</li>
             <li>All tags, labels, and accessories are intact</li>
             <li>The item has not been used or installed</li>
-            <li>You have your proof of purchase</li>
+            <li>You should have your proof of purchase</li>
           </ul>
           <p>
             Custom-made or personalized items are not eligible for return unless
@@ -42,9 +42,7 @@ const ReturnPolicy = () => {
           <h2>3. Return Process</h2>
           <p>To initiate a return:</p>
           <ol>
-            <li>
-              Contact our customer service team within 30 days of delivery
-            </li>
+            <li>Contact our customer service team within 7 days of delivery</li>
             <li>Provide your order number and reason for return</li>
             <li>Receive a return authorization number</li>
             <li>Pack the item securely in its original packaging</li>
@@ -97,11 +95,11 @@ const ReturnPolicy = () => {
             If you have any questions about our return policy or need to
             initiate a return, please contact us:
             <br />
-            <strong>Email:</strong> returns@sparkluslamps.com
+            <strong>Email:</strong> contact@sparkluslamps.com
             <br />
-            <strong>Phone:</strong> +1 (555) 123-4567
+            <strong>Phone:</strong> +91 9548218100
             <br />
-            <strong>Hours:</strong> Monday - Friday, 9 AM - 6 PM EST
+            <strong>Hours:</strong> Monday - Friday, 10:00 AM - 6:00 PM IST
           </p>
         </section>
       </div>

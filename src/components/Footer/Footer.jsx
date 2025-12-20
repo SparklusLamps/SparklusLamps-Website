@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { companyDetails, footerLinks } from "../../constants";
 import {
@@ -27,9 +28,9 @@ const Footer = () => {
                 <span className="logo-accent">Lamps</span>
               </motion.div>
               <p className="footer-description">
-                {companyDetails.name} is your trusted technology partner,
-                helping businesses and entrepreneurs leverage technology to
-                grow, automate, and succeed.
+                {companyDetails.name} crafts sustainable, handcrafted lighting
+                designed to bring warmth, character, and modern elegance to
+                every space.
               </p>
               <div className="footer-social">
                 {/* <a
@@ -56,14 +57,14 @@ const Footer = () => {
                 >
                   <FaTwitter />
                 </a> */}
-                {/* <a
+                <a
                   href={companyDetails.socialMedia.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-link"
                 >
                   <FaLinkedin />
-                </a> */}
+                </a>
                 <a
                   href={companyDetails.socialMedia.pinterest}
                   target="_blank"
@@ -125,9 +126,9 @@ const Footer = () => {
             </p>
             <div className="footer-legal">
               {footerLinks.legal.map((link, index) => (
-                <a key={index} href={link.path}>
+                <Link key={index} to={link.path}>
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

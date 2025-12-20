@@ -88,9 +88,9 @@ const PrivacyPolicy = () => {
             If you have any questions about this Privacy Policy, please contact
             us at:
             <br />
-            <strong>Email:</strong> info@sparkluslamps.com
+            <strong>Email:</strong> contact@sparkluslamps.com
             <br />
-            <strong>Phone:</strong> +1 (555) 123-4567
+            <strong>Phone:</strong> +91 9548218100
           </p>
         </section>
       </div>
