@@ -12,6 +12,8 @@ const CustomizationForm = () => {
     threshold: 0.1,
   });
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -179,188 +181,232 @@ const CustomizationForm = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <form onSubmit={handleSubmit} className="customization-form">
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="name" className="form-label">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="form-input"
-                  required
-                  disabled={status.loading}
-                  placeholder="John Doe"
-                />
-              </div>
-
-              <div className="form-group phone-group">
-                <label htmlFor="phoneNumber" className="form-label">
-                  Phone Number *
-                </label>
-                <div className="phone-row">
-                  <select
-                    name="phoneCountry"
-                    value={formData.phoneCountry}
-                    onChange={handleChange}
-                    disabled={status.loading}
-                    className="phone-select"
-                    aria-label="Country code"
-                  >
-                    <option value="+91">🇮🇳 +91</option>
-                    <option value="+1">🇺🇸 +1</option>
-                    <option value="+44">🇬🇧 +44</option>
-                    <option value="+61">🇦🇺 +61</option>
-                    <option value="+49">🇩🇪 +49</option>
-                  </select>
-                  <input
-                    type="tel"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                    className="form-input phone-input"
-                    required
-                    disabled={status.loading}
-                    placeholder="8012345678"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="email" className="form-label">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="form-input"
-                  required
-                  disabled={status.loading}
-                  placeholder="john@example.com"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="city" className="form-label">
-                  City
-                </label>
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  className="form-input"
-                  placeholder="Mumbai"
-                  disabled={status.loading}
-                />
-              </div>
-            </div>
-
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="serviceType" className="form-label">
-                  Type of Service Required
-                </label>
-                <select
-                  id="serviceType"
-                  name="serviceType"
-                  value={formData.serviceType}
-                  onChange={handleChange}
-                  className="form-input"
-                  disabled={status.loading}
-                >
-                  <option value="home">Home</option>
-                  <option value="restaurant">Restaurant</option>
-                  <option value="hotel">Hotel</option>
-                  <option value="office">Office</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">Type of Fixture Required</label>
-                <div className="fixtures-grid">
-                  {["pendant", "floor", "table", "wall", "custom idea"].map(
-                    (f) => (
-                      <label key={f} className="fixture-item">
-                        <input
-                          type="checkbox"
-                          name="fixtures"
-                          value={f}
-                          checked={(formData.fixtures || []).includes(f)}
-                          onChange={() => toggleFixture(f)}
-                          disabled={status.loading}
-                        />
-                        <span className="fixture-label">{f}</span>
-                      </label>
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="dimensions" className="form-label">
-                Size / Dimensions (optional)
-              </label>
-              <input
-                type="text"
-                id="dimensions"
-                name="dimensions"
-                value={formData.dimensions}
-                onChange={handleChange}
-                className="form-input"
-                placeholder="e.g., 120cm x 40cm x 30cm"
-                disabled={status.loading}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="customNeed" className="form-label">
-                Describe Your Custom Need (optional)
-              </label>
-              <textarea
-                id="customNeed"
-                name="customNeed"
-                value={formData.customNeed}
-                onChange={handleChange}
-                className="form-textarea"
-                disabled={status.loading}
-                rows="6"
-                placeholder="Tell us about your project, space dimensions, design preferences, and any specific requirements..."
-              />
-            </div>
-
-            {/* status message removed from inline form; toast appears in top-right */}
-
+          {!isExpanded && (
             <motion.button
-              type="submit"
-              className="btn btn-primary submit-btn"
-              disabled={status.loading}
+              className="expand-form-btn"
+              onClick={() => setIsExpanded(true)}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {status.loading ? (
-                "Sending..."
-              ) : (
-                <>
-                  <span>Send Request</span>
-                  {/* <FaPaperPlane /> */}
-                </>
-              )}
+              <span className="expand-icon">+</span>
+              <span className="expand-text">Get Custom Quote</span>
             </motion.button>
-          </form>
+          )}
+
+          <AnimatePresence>
+            {isExpanded && (
+              <motion.div
+                initial={{ opacity: 0, height: 0, scale: 0.95 }}
+                animate={{ opacity: 1, height: "auto", scale: 1 }}
+                exit={{ opacity: 0, height: 0, scale: 0.95 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                style={{ overflow: "hidden" }}
+              >
+                <motion.button
+                  className="collapse-form-btn"
+                  onClick={() => setIsExpanded(false)}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="collapse-icon">−</span>
+                  <span className="collapse-text">Close Form</span>
+                </motion.button>
+                <form onSubmit={handleSubmit} className="customization-form">
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="name" className="form-label">
+                        Full Name *
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="form-input"
+                        required
+                        disabled={status.loading}
+                        placeholder="John Doe"
+                      />
+                    </div>
+
+                    <div className="form-group phone-group">
+                      <label htmlFor="phoneNumber" className="form-label">
+                        Phone Number *
+                      </label>
+                      <div className="phone-row">
+                        <select
+                          name="phoneCountry"
+                          value={formData.phoneCountry}
+                          onChange={handleChange}
+                          disabled={status.loading}
+                          className="phone-select"
+                          aria-label="Country code"
+                        >
+                          <option value="+91">🇮🇳 +91</option>
+                          <option value="+1">🇺🇸 +1</option>
+                          <option value="+44">🇬🇧 +44</option>
+                          <option value="+61">🇦🇺 +61</option>
+                          <option value="+49">🇩🇪 +49</option>
+                        </select>
+                        <input
+                          type="tel"
+                          id="phoneNumber"
+                          name="phoneNumber"
+                          value={formData.phoneNumber}
+                          onChange={handleChange}
+                          className="form-input phone-input"
+                          required
+                          disabled={status.loading}
+                          placeholder="8012345678"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="email" className="form-label">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="form-input"
+                        required
+                        disabled={status.loading}
+                        placeholder="john@example.com"
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="city" className="form-label">
+                        City
+                      </label>
+                      <input
+                        type="text"
+                        id="city"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleChange}
+                        className="form-input"
+                        placeholder="Mumbai"
+                        disabled={status.loading}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="serviceType" className="form-label">
+                        Type of Service Required
+                      </label>
+                      <select
+                        id="serviceType"
+                        name="serviceType"
+                        value={formData.serviceType}
+                        onChange={handleChange}
+                        className="form-input"
+                        disabled={status.loading}
+                      >
+                        <option value="home">Home</option>
+                        <option value="restaurant">Restaurant</option>
+                        <option value="hotel">Hotel</option>
+                        <option value="office">Office</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label">
+                        Type of Fixture Required
+                      </label>
+                      <div className="fixtures-grid">
+                        {[
+                          "pendant",
+                          "floor",
+                          "table",
+                          "wall",
+                          "custom idea",
+                        ].map((f) => (
+                          <label key={f} className="fixture-item">
+                            <input
+                              type="checkbox"
+                              name="fixtures"
+                              value={f}
+                              checked={(formData.fixtures || []).includes(f)}
+                              onChange={() => toggleFixture(f)}
+                              disabled={status.loading}
+                            />
+                            <span className="fixture-label">{f}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="dimensions" className="form-label">
+                      Size / Dimensions (optional)
+                    </label>
+                    <input
+                      type="text"
+                      id="dimensions"
+                      name="dimensions"
+                      value={formData.dimensions}
+                      onChange={handleChange}
+                      className="form-input"
+                      placeholder="e.g., 120cm x 40cm x 30cm"
+                      disabled={status.loading}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="customNeed" className="form-label">
+                      Describe Your Custom Need (optional)
+                    </label>
+                    <textarea
+                      id="customNeed"
+                      name="customNeed"
+                      value={formData.customNeed}
+                      onChange={handleChange}
+                      className="form-textarea"
+                      disabled={status.loading}
+                      rows="6"
+                      placeholder="Tell us about your project, space dimensions, design preferences, and any specific requirements..."
+                    />
+                  </div>
+
+                  {/* status message removed from inline form; toast appears in top-right */}
+
+                  <motion.button
+                    type="submit"
+                    className="btn btn-primary submit-btn"
+                    disabled={status.loading}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {status.loading ? (
+                      "Sending..."
+                    ) : (
+                      <>
+                        <span>Send Request</span>
+                        {/* <FaPaperPlane /> */}
+                      </>
+                    )}
+                  </motion.button>
+                </form>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
         {/* Toast - top-right */}
         <AnimatePresence>

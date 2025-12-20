@@ -21,6 +21,10 @@
   margin-bottom: 15px;
 }
 
+.contact-icon.phone-icon svg {
+  transform: scaleX(-1);
+}
+
 .contact-card h3 {
   font-size: 1.4rem;
   margin-bottom: 10px;

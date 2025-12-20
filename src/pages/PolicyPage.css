@@ -55,7 +55,8 @@
   font-size: 1.05rem;
 }
 
-.policy-section ul {
+.policy-section ul,
+.policy-section ol {
   list-style-position: inside;
   color: var(--text-secondary);
   line-height: 2;
@@ -66,6 +67,7 @@
 .policy-section li {
   margin-bottom: 10px;
   font-size: 1.05rem;
+  color: var(--text-secondary);
 }
 
 .policy-section strong {

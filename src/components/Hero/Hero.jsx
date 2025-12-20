@@ -68,21 +68,6 @@ const Hero = () => {
           </motion.button>
         </motion.div>
 
-        {/* Right Content - Hero Image */}
-        <motion.div
-          className="hero-image"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <div className="hero-image-wrapper">
-            {/* Placeholder for luxury lamp image */}
-            <div className="hero-lamp-placeholder">
-              {/* You'll add your actual lamp image here */}
-            </div>
-          </div>
-        </motion.div>
-
         {/* Social Media Icons */}
         <motion.div
           className="hero-social"
@@ -90,14 +75,14 @@ const Hero = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 1.2 }}
         >
-          <a href="tel:+919548218100" className="social-icon">
+          <a href="tel:+919548218100" className="social-icon phone-icon">
             <FaPhone />
           </a>
           <a
-            href="https://wa.me/9548218100"
+            href="https://wa.me/+918077288425?text=Hi,%20I%E2%80%99m%20looking%20for%20customized%20lighting%20fixtures%20for%20my%20space/project."
             target="_blank"
             rel="noopener noreferrer"
-            className="social-icon"
+            className="social-icon whatsapp-icon"
           >
             <FaWhatsapp />
           </a>

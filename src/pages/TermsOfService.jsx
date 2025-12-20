@@ -38,8 +38,6 @@ const TermsOfService = () => {
             <li>All orders are subject to acceptance and availability</li>
             <li>Prices are subject to change without notice</li>
             <li>Payment must be received before order processing</li>
-            <li>We accept major credit cards and wire transfers</li>
-            <li>Custom orders may require a deposit</li>
           </ul>
         </section>
 
@@ -47,15 +45,16 @@ const TermsOfService = () => {
           <h2>4. Shipping and Delivery</h2>
           <p>
             Shipping times vary based on location and product availability.
-            Custom pieces may take 8-12 weeks for completion. We are not
-            responsible for delays caused by shipping carriers or customs.
+            Custom pieces may take 4-12 weeks for completion depending on the
+            estimate sent by us. We are not responsible for delays caused by
+            shipping carriers or customs.
           </p>
         </section>
 
         <section className="policy-section">
           <h2>5. Returns and Refunds</h2>
           <p>
-            Standard products may be returned within 30 days of delivery in
+            Standard products may be returned within 7 days of delivery in
             original condition. Custom-made products are non-refundable. Please
             refer to our Return Policy for detailed information.
           </p>
@@ -64,9 +63,8 @@ const TermsOfService = () => {
         <section className="policy-section">
           <h2>6. Warranty</h2>
           <p>
-            All products come with a 5-year warranty covering manufacturing
-            defects and electrical components. The warranty does not cover
-            damage from misuse, accidents, or normal wear and tear.
+            We do not cover damage from misuse, accidents, or normal wear and
+            tear.
           </p>
         </section>
 
@@ -101,9 +99,9 @@ const TermsOfService = () => {
           <p>
             For questions about these Terms of Service, contact us at:
             <br />
-            <strong>Email:</strong> info@sparkluslamps.com
+            <strong>Email:</strong> contact@sparkluslamps.com
             <br />
-            <strong>Phone:</strong> +1 (555) 123-4567
+            <strong>Phone:</strong> +91 9548218100
           </p>
         </section>
       </div>

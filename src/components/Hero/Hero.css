@@ -5,16 +5,16 @@
   align-items: center;
   padding: 0 5%;
   overflow: hidden;
-  background: var(--primary-bg);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.3) 100%), 
+              url('/SparklusLamps-Website/images/hero-image.jpg') center center / cover no-repeat;
 }
 
 .hero-container {
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
   padding: 100px 0 50px;
   position: relative;
@@ -22,6 +22,7 @@
 
 .hero-content {
   z-index: 2;
+  max-width: 600px;
 }
 
 .hero-tagline {
@@ -72,6 +73,84 @@
   align-items: center;
 }
 
+.hero-aura-container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-lamp-image {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  object-fit: contain;
+  z-index: 5;
+  filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.4));
+  animation: imagePulse 4s ease-in-out infinite;
+}
+
+@keyframes imagePulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.4));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 50px rgba(212, 175, 55, 0.6));
+    transform: scale(1.02);
+  }
+}
+
+.aura-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 
+    0 0 20px rgba(212, 175, 55, 0.4),
+    inset 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.aura-ring-1 {
+  width: 100%;
+  height: 100%;
+  animation: auraExpand 4s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+}
+
+.aura-ring-2 {
+  width: 85%;
+  height: 85%;
+  animation: auraExpand 4s ease-in-out infinite 0.5s;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
+}
+
+.aura-ring-3 {
+  width: 70%;
+  height: 70%;
+  animation: auraExpand 4s ease-in-out infinite 1s;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, transparent 70%);
+}
+
+.aura-ring-4 {
+  width: 55%;
+  height: 55%;
+  animation: auraExpand 4s ease-in-out infinite 1.5s;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
+}
+
+@keyframes auraExpand {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.7;
+  }
+}
+
 .hero-lamp-placeholder {
   width: 500px;
   height: 500px;
@@ -116,25 +195,46 @@
 }
 
 .social-icon {
-  width: 45px;
-  height: 45px;
+  width: 55px;
+  height: 55px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--text-primary);
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   transition: var(--transition-smooth);
-  border: 1px solid var(--border-color);
   border-radius: 8px;
-  background: rgba(17, 17, 17, 0.5);
   backdrop-filter: blur(10px);
 }
 
-.social-icon:hover {
-  color: var(--accent-gold);
-  border-color: var(--accent-gold);
+.social-icon.phone-icon {
+  color: #007AFF;
+  background: #ffffff;
+  border: 1px solid #007AFF;
+}
+
+.social-icon.phone-icon svg {
+  transform: scaleX(-1);
+}
+
+.social-icon.phone-icon:hover {
+  background: #007AFF;
+  color: #ffffff;
+  border-color: #007AFF;
   transform: translateX(-5px);
-  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 5px 20px rgba(0, 122, 255, 0.4);
+}
+
+.social-icon.whatsapp-icon {
+  color: #ffffff;
+  background: #25D366;
+  border: 1px solid #25D366;
+}
+
+.social-icon.whatsapp-icon:hover {
+  background: #20BA5A;
+  border-color: #20BA5A;
+  transform: translateX(-5px);
+  box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
 }
 
 /* Scroll Indicator */
@@ -255,9 +355,14 @@
     gap: 50px;
   }
 
-  .hero-lamp-placeholder {
+  .hero-aura-container {
     width: 400px;
     height: 400px;
+  }
+
+  .hero-lamp-image {
+    width: 320px;
+    height: 320px;
   }
 
   .hero-social {
@@ -288,9 +393,14 @@
     height: 400px;
   }
 
-  .hero-lamp-placeholder {
+  .hero-aura-container {
     width: 300px;
     height: 300px;
+  }
+
+  .hero-lamp-image {
+    width: 240px;
+    height: 240px;
   }
 
   .hero-social {
@@ -334,15 +444,20 @@
     font-size: 0.9rem;
   }
 
-  .hero-lamp-placeholder {
+  .hero-aura-container {
     width: 250px;
     height: 250px;
   }
 
+  .hero-lamp-image {
+    width: 200px;
+    height: 200px;
+  }
+
   .social-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 1.1rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.3rem;
   }
 
   .bg-circle-1,
