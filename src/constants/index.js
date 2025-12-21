@@ -21,7 +21,7 @@ export const aboutContent = {
   title: "About Sparklus Lamps",
   ourStory: {
     heading: "Our Story",
-    image: "/SparklusLamps-Website/images/our-story.jpg",
+    image: "/images/our-story.jpg",
     content:
       "Founded with a vision to revolutionize luxury lighting, Sparklus Lamps has been illuminating spaces with elegance and sophistication since our inception. Our journey began with a passion for creating lighting solutions that transcend mere functionality and become works of art.",
   },
@@ -45,7 +45,7 @@ export const pastWorks = [
     location: "London, U.K",
     description:
       "Luxury chandelier installation featuring custom crystal designs",
-    image: "/SparklusLamps-Website/images/work1.jpg",
+    image: "/images/work1.jpg",
     year: "2024",
   },
   {
@@ -54,7 +54,7 @@ export const pastWorks = [
     location: "Toronto,Canada",
     description:
       "Designed to soften your space, the Solace Dome Lamp features a sculptural dome silhouette handcrafted from cotton paper",
-    image: "/SparklusLamps-Website/images/work2.jpg",
+    image: "/images/work2.jpg",
     year: "2023",
   },
   {
@@ -62,7 +62,7 @@ export const pastWorks = [
     title: "the Bends",
     location: "Lucknow, India",
     description: "Bespoke theatrical lighting installation",
-    image: "/SparklusLamps-Website/images/work3.jpg",
+    image: "/images/work3.jpg",
     year: "2023",
   },
   {
@@ -70,7 +70,7 @@ export const pastWorks = [
     title: "Glowing Paper Petals",
     location: "Hyderabad, India",
     description: "Waterfront property with custom LED ambience lighting",
-    image: "/SparklusLamps-Website/images/work4.jpg",
+    image: "/images/work4.jpg",
     year: "2024",
   },
 ];
@@ -113,9 +113,9 @@ export const products = [
     price: "",
     amazonLink: "https://amzn.in/d/gYd6El6",
     images: [
-      "/SparklusLamps-Website/images/product1-1.jpg",
-      "/SparklusLamps-Website/images/product1-2.jpg",
-      "/SparklusLamps-Website/images/product1-3.jpg",
+      "/images/product1-1.jpg",
+      "/images/product1-2.jpg",
+      "/images/product1-3.jpg",
     ],
     category: "Table Lamp",
   },
@@ -127,9 +127,9 @@ export const products = [
     price: "",
     amazonLink: "https://amzn.in/d/i9ddgfK",
     images: [
-      "/SparklusLamps-Website/images/product2-1.jpg",
-      "/SparklusLamps-Website/images/product2-2.jpg",
-      "/SparklusLamps-Website/images/product2-3.jpg",
+      "/images/product2-1.jpg",
+      "/images/product2-2.jpg",
+      "/images/product2-3.jpg",
     ],
     category: "Floor Lamp",
   },
@@ -141,9 +141,9 @@ export const products = [
     price: "",
     amazonLink: "https://amzn.in/d/eatMtxH",
     images: [
-      "/SparklusLamps-Website/images/product3-1.jpg",
-      "/SparklusLamps-Website/images/product3-2.jpg",
-      "/SparklusLamps-Website/images/product3-3.jpg",
+      "/images/product3-1.jpg",
+      "/images/product3-2.jpg",
+      "/images/product3-3.jpg",
     ],
     category: "Table Lamp",
   },
@@ -155,9 +155,9 @@ export const products = [
     price: "",
     amazonLink: "https://amzn.in/d/6mvZwLY",
     images: [
-      "/SparklusLamps-Website/images/product4-1.jpg",
-      "/SparklusLamps-Website/images/product4-2.jpg",
-      "/SparklusLamps-Website/images/product4-3.jpg",
+      "/images/product4-1.jpg",
+      "/images/product4-2.jpg",
+      "/images/product4-3.jpg",
     ],
     category: "Table Lamp",
   },
