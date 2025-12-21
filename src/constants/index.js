@@ -238,8 +238,8 @@ export const companyDetails = {
 export const footerLinks = {
   quickLinks: [
     { name: "Our Story", path: "#about" },
-    { name: "Our Collection", path: "#products" },
-    { name: "Past Works", path: "#works" },
+    { name: "Our Projects", path: "#works" },
+    { name: "Products", path: "#products" },
     { name: "FAQs", path: "#faqs" },
     { name: "Contact", path: "#contact" },
   ],
