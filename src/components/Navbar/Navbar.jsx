@@ -69,6 +69,22 @@ const Navbar = () => {
               </a>
             </motion.li>
           ))}
+          <motion.li
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: navLinks.length * 0.1 }}
+          >
+            <a
+              href="/designers-architects"
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = "/designers-architects";
+              }}
+              className="nav-link"
+            >
+              For Designers
+            </a>
+          </motion.li>
         </ul>
 
         {/* Mobile Menu Toggle */}
@@ -107,6 +123,23 @@ const Navbar = () => {
                 </a>
               </motion.li>
             ))}
+            <motion.li
+              initial={{ opacity: 0, x: 50 }}
+              animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+              transition={{ delay: navLinks.length * 0.1 }}
+            >
+              <a
+                href="/designers-architects"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsOpen(false);
+                  window.location.href = "/designers-architects";
+                }}
+                className="nav-link"
+              >
+                For Designers
+              </a>
+            </motion.li>
           </ul>
         </motion.div>
       </div>
