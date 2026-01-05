@@ -87,12 +87,17 @@
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  height: 600px;
 }
 
-.da-hero-image img {
+.da-hero-crossfade-img {
   width: 100%;
-  height: 600px;
+  height: 100%;
   object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 /* Section Styling */
@@ -106,6 +111,293 @@
   margin-bottom: 50px;
   font-family: var(--font-heading);
   text-align: center;
+}
+
+/* Featured Projects Section */
+.da-container-full {
+  max-width: 100%;
+  width: 100%;
+}
+
+.da-featured-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 0 5%;
+}
+
+.da-featured-subtext {
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  margin-top: -30px;
+  margin-bottom: 40px;
+}
+
+.da-cta-center {
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Email Popup Modal */
+.da-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.da-popup-content {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.da-popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.da-popup-close:hover {
+  color: var(--accent-gold);
+}
+
+.da-popup-content h3 {
+  color: var(--text-primary);
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  font-family: var(--font-heading);
+}
+
+.da-popup-content p {
+  color: var(--text-secondary);
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.da-popup-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.da-popup-content input {
+  padding: 16px 20px;
+  background: var(--primary-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.da-popup-content input:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+/* Timeline Process */
+.da-timeline {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+
+.da-timeline-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.da-timeline-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.da-timeline-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  box-shadow: 0 0 0 6px rgba(255, 215, 0, 0.2);
+  position: relative;
+  z-index: 2;
+}
+
+.da-timeline-line {
+  width: 3px;
+  flex: 1;
+  background: linear-gradient(to bottom, var(--accent-gold), rgba(255, 215, 0, 0.3));
+  margin-top: 10px;
+  min-height: 80px;
+}
+
+.da-timeline-content {
+  background: var(--card-bg);
+  padding: 25px 30px;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.da-timeline-content:hover {
+  border-color: var(--accent-gold);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+  transform: translateX(5px);
+}
+
+.da-timeline-content h4 {
+  color: var(--accent-gold);
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  font-family: var(--font-heading);
+}
+
+.da-timeline-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.da-timeline-content li {
+  color: var(--text-secondary);
+  padding: 8px 0;
+  padding-left: 25px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.da-timeline-content li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent-gold);
+  font-weight: bold;
+}
+
+/* Artisans & Craftsmanship Gallery */
+.da-artisans-intro {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  margin-bottom: 50px;
+  margin-top: -30px;
+}
+
+.da-artisans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.da-artisan-card {
+  border-radius: 15px;
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.da-artisan-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
+  border-color: var(--accent-gold);
+}
+
+.da-artisan-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.da-artisan-card p {
+  padding: 20px;
+  color: var(--text-secondary);
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Materials & Technical Specs */
+.da-materials {
+  background: var(--card-bg);
+}
+
+.da-materials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.da-material-card {
+  background: var(--primary-bg);
+  padding: 30px 25px;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.da-material-card:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+}
+
+.da-material-card h4 {
+  color: var(--accent-gold);
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  font-family: var(--font-heading);
+}
+
+.da-material-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+/* Quality Assurance */
+.da-quality-assurance {
+  background: var(--card-bg);
+  padding: 30px 40px;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  margin: 30px 0;
+}
+
+.da-quality-assurance h3 {
+  color: var(--accent-gold);
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  font-family: var(--font-heading);
+}
+
+.da-quality-assurance p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 1.1rem;
 }
 
 /* Who We Work With */
@@ -494,7 +786,7 @@
     gap: 50px;
   }
 
-  .da-hero-image img,
+  .da-hero-image,
   .da-what-image img,
   .da-craft-image img {
     height: 400px;
@@ -510,6 +802,11 @@
 
   .da-collab-content h2 {
     font-size: 2.3rem;
+  }
+
+  .da-timeline-item {
+    grid-template-columns: 50px 1fr;
+    gap: 20px;
   }
 }
 
@@ -546,7 +843,9 @@
   }
 
   .da-who-grid,
-  .da-projects-grid {
+  .da-projects-grid,
+  .da-artisans-grid,
+  .da-materials-grid {
     grid-template-columns: 1fr;
     gap: 25px;
   }
@@ -570,6 +869,23 @@
   .da-collab-btns {
     flex-direction: column;
   }
+
+  .da-timeline-item {
+    grid-template-columns: 40px 1fr;
+    gap: 15px;
+  }
+
+  .da-timeline-line {
+    min-height: 60px;
+  }
+
+  .da-popup-content {
+    padding: 30px 25px;
+  }
+
+  .da-quality-assurance {
+    padding: 25px 30px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -581,7 +897,7 @@
     font-size: 1rem;
   }
 
-  .da-hero-image img,
+  .da-hero-image,
   .da-what-image img,
   .da-craft-image img {
     height: 300px;
@@ -596,11 +912,33 @@
     padding: 25px 20px;
   }
 
-  .da-project-card img {
+  .da-project-card img,
+  .da-artisan-card img {
     height: 250px;
   }
 
-  .da-projects-grid {
+  .da-projects-grid,
+  .da-artisans-grid {
     grid-template-columns: 1fr;
+  }
+
+  .da-timeline-content {
+    padding: 20px;
+  }
+
+  .da-popup-content {
+    padding: 25px 20px;
+  }
+
+  .da-popup-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .da-quality-assurance {
+    padding: 20px 25px;
+  }
+
+  .da-quality-assurance h3 {
+    font-size: 1.4rem;
   }
 }
