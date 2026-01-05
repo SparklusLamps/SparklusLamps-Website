@@ -1,0 +1,606 @@
+.designers-page {
+  min-height: 100vh;
+  background: var(--primary-bg);
+}
+
+/* Hero Section */
+.da-hero {
+  min-height: 90vh;
+  padding: 140px 5% 80px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.da-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.da-hero .da-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.da-hero-content h1 {
+  font-size: 3.5rem;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  font-family: var(--font-heading);
+  line-height: 1.2;
+}
+
+.da-hero-subtext {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.da-hero-ctas {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.da-btn {
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.da-btn-primary {
+  background: var(--accent-gold);
+  color: var(--primary-bg);
+  border: 2px solid var(--accent-gold);
+}
+
+.da-btn-primary:hover {
+  background: transparent;
+  color: var(--accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+}
+
+.da-btn-secondary {
+  background: transparent;
+  color: var(--accent-gold);
+  border: 2px solid var(--accent-gold);
+}
+
+.da-btn-secondary:hover {
+  background: var(--accent-gold);
+  color: var(--primary-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+}
+
+.da-hero-image {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.da-hero-image img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+
+/* Section Styling */
+.da-section {
+  padding: 100px 5%;
+}
+
+.da-section-title {
+  font-size: 2.8rem;
+  color: var(--text-primary);
+  margin-bottom: 50px;
+  font-family: var(--font-heading);
+  text-align: center;
+}
+
+/* Who We Work With */
+.da-who-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.da-who-card {
+  background: var(--card-bg);
+  padding: 40px 30px;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.da-who-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+  border-color: var(--accent-gold);
+}
+
+.da-who-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.da-who-card h3 {
+  font-size: 1.5rem;
+  color: var(--accent-gold);
+  margin-bottom: 15px;
+  font-family: var(--font-heading);
+}
+
+.da-who-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+/* What We Do */
+.da-what {
+  background: var(--card-bg);
+}
+
+.da-what .da-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.da-what-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.da-what-item {
+  display: flex;
+  gap: 20px;
+}
+
+.da-bullet {
+  color: var(--accent-gold);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.da-what-item h4 {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  font-family: var(--font-heading);
+}
+
+.da-what-item p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+.da-what-image {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.da-what-image img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+/* Process Section */
+.da-process {
+  background: var(--primary-bg);
+}
+
+.da-process-intro {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  margin-bottom: 60px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.da-process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.da-process-step {
+  text-align: center;
+  padding: 30px 20px;
+  background: var(--card-bg);
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.da-process-step:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-gold);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+}
+
+.da-step-number {
+  font-size: 2.5rem;
+  color: var(--accent-gold);
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-family: var(--font-heading);
+}
+
+.da-process-step h4 {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  font-family: var(--font-heading);
+}
+
+.da-process-step p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Craft Section */
+.da-craft {
+  background: var(--card-bg);
+}
+
+.da-craft .da-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.da-craft-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.da-pillar h4 {
+  font-size: 1.5rem;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
+  font-family: var(--font-heading);
+}
+
+.da-pillar p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+.da-craft-image {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.da-craft-image img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+/* Projects Section */
+.da-projects {
+  background: var(--primary-bg);
+}
+
+.da-projects-intro {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1.15rem;
+  margin-bottom: 60px;
+}
+
+.da-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.da-project-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.da-project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
+}
+
+.da-project-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.da-project-caption {
+  padding: 20px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Collaboration CTA */
+.da-collab-cta {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 215, 0, 0.02));
+  padding: 120px 5%;
+}
+
+.da-collab-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.da-collab-content h2 {
+  font-size: 3rem;
+  color: var(--text-primary);
+  margin-bottom: 25px;
+  font-family: var(--font-heading);
+}
+
+.da-collab-content p {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.da-collab-btns {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Contact Form */
+.da-contact {
+  background: var(--card-bg);
+  padding: 100px 5%;
+}
+
+.da-contact-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.da-contact-wrapper h2 {
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  font-family: var(--font-heading);
+}
+
+.da-contact-wrapper > p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.da-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.da-contact-form input {
+  padding: 16px 20px;
+  background: var(--primary-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.da-contact-form input:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+.da-contact-form input::placeholder {
+  color: var(--text-muted);
+}
+
+.da-btn-submit {
+  background: var(--accent-gold);
+  color: var(--primary-bg);
+  border: 2px solid var(--accent-gold);
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.da-btn-submit:hover {
+  background: transparent;
+  color: var(--accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Footer Reinforcement */
+.da-footer-reinforcement {
+  background: var(--primary-bg);
+  padding: 80px 5%;
+  border-top: 1px solid var(--border-color);
+}
+
+.da-footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.da-footer-col h4 {
+  font-size: 1.3rem;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
+  font-family: var(--font-heading);
+}
+
+.da-footer-col p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .da-hero .da-container,
+  .da-what .da-container,
+  .da-craft .da-container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .da-hero-image img,
+  .da-what-image img,
+  .da-craft-image img {
+    height: 400px;
+  }
+
+  .da-hero-content h1 {
+    font-size: 2.8rem;
+  }
+
+  .da-section-title {
+    font-size: 2.3rem;
+  }
+
+  .da-collab-content h2 {
+    font-size: 2.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .da-hero {
+    min-height: auto;
+    padding: 100px 5% 60px;
+  }
+
+  .da-hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .da-hero-subtext {
+    font-size: 1.1rem;
+  }
+
+  .da-hero-ctas {
+    flex-direction: column;
+  }
+
+  .da-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .da-section {
+    padding: 70px 5%;
+  }
+
+  .da-section-title {
+    font-size: 2rem;
+    margin-bottom: 35px;
+  }
+
+  .da-who-grid,
+  .da-projects-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .da-process-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .da-collab-cta {
+    padding: 80px 5%;
+  }
+
+  .da-collab-content h2 {
+    font-size: 2rem;
+  }
+
+  .da-collab-content p {
+    font-size: 1.1rem;
+  }
+
+  .da-collab-btns {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .da-hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .da-hero-subtext {
+    font-size: 1rem;
+  }
+
+  .da-hero-image img,
+  .da-what-image img,
+  .da-craft-image img {
+    height: 300px;
+  }
+
+  .da-section-title {
+    font-size: 1.7rem;
+  }
+
+  .da-who-card,
+  .da-process-step {
+    padding: 25px 20px;
+  }
+
+  .da-project-card img {
+    height: 250px;
+  }
+
+  .da-projects-grid {
+    grid-template-columns: 1fr;
+  }
+}

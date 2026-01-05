@@ -14,6 +14,7 @@ import Footer from "./components/Footer/Footer";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ReturnPolicy from "./pages/ReturnPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import DesignersArchitects from "./pages/DesignersArchitects";
 import "./styles/index.css";
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/return-policy" element={<ReturnPolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/designers-architects" element={<DesignersArchitects />} />
       </Routes>
     </div>
   );
