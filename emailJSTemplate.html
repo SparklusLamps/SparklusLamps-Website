@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Project Enquiry - Sparklus Lamps</title>
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #0a0a0a;
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      color: #ffffff;
+    "
+  >
+    <div style="display: none; max-height: 0; overflow: hidden; opacity: 0">
+      New project enquiry from {{from_name}} — {{project_type}} in {{city}}
+    </div>
+
+    <table
+      role="presentation"
+      width="100%"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      style="background-color: #0a0a0a; padding: 32px 16px"
+    >
+      <tr>
+        <td align="center">
+          <table
+            role="presentation"
+            width="100%"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            style="
+              max-width: 640px;
+              background-color: #111111;
+              border: 1px solid #2a2a2a;
+              border-radius: 14px;
+              overflow: hidden;
+              box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+            "
+          >
+            <!-- Header -->
+            <tr>
+              <td
+                style="
+                  padding: 28px 32px 24px;
+                  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+                  border-bottom: 1px solid #2a2a2a;
+                "
+              >
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                >
+                  <tr>
+                    <td>
+                      <p
+                        style="
+                          margin: 0 0 8px;
+                          font-size: 11px;
+                          letter-spacing: 3px;
+                          text-transform: uppercase;
+                          color: #d4af37;
+                          font-weight: 600;
+                        "
+                      >
+                        Sparklus Lamps
+                      </p>
+                      <h1
+                        style="
+                          margin: 0;
+                          font-size: 26px;
+                          line-height: 1.3;
+                          font-weight: 500;
+                          color: #ffffff;
+                          font-family: Georgia, 'Times New Roman', serif;
+                        "
+                      >
+                        New Project Enquiry
+                      </h1>
+                      <p
+                        style="
+                          margin: 10px 0 0;
+                          font-size: 14px;
+                          line-height: 1.6;
+                          color: #b0b0b0;
+                        "
+                      >
+                        A new enquiry was submitted from the Contact Us page.
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Intro -->
+            <tr>
+              <td style="padding: 28px 32px 8px">
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 15px;
+                    line-height: 1.7;
+                    color: #b0b0b0;
+                  "
+                >
+                  Please review the details below and follow up with the client
+                  at your earliest convenience.
+                </p>
+              </td>
+            </tr>
+
+            <!-- Contact details -->
+            <tr>
+              <td style="padding: 20px 32px 8px">
+                <p
+                  style="
+                    margin: 0 0 14px;
+                    font-size: 11px;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    color: #d4af37;
+                    font-weight: 600;
+                  "
+                >
+                  Contact Details
+                </p>
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  style="
+                    background-color: #0a0a0a;
+                    border: 1px solid #2a2a2a;
+                    border-radius: 10px;
+                  "
+                >
+                  <tr>
+                    <td style="padding: 16px 18px; border-bottom: 1px solid #222222">
+                      <p style="margin: 0 0 4px; font-size: 11px; color: #808080; text-transform: uppercase; letter-spacing: 1px">Full Name</p>
+                      <p style="margin: 0; font-size: 16px; color: #ffffff">{{from_name}}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 16px 18px; border-bottom: 1px solid #222222">
+                      <p style="margin: 0 0 4px; font-size: 11px; color: #808080; text-transform: uppercase; letter-spacing: 1px">Email</p>
+                      <p style="margin: 0; font-size: 16px; color: #ffffff">
+                        <a href="mailto:{{from_email}}" style="color: #d4af37; text-decoration: none">{{from_email}}</a>
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 16px 18px; border-bottom: 1px solid #222222">
+                      <p style="margin: 0 0 4px; font-size: 11px; color: #808080; text-transform: uppercase; letter-spacing: 1px">Phone</p>
+                      <p style="margin: 0; font-size: 16px; color: #ffffff">{{phone_number}}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 16px 18px">
+                      <p style="margin: 0 0 4px; font-size: 11px; color: #808080; text-transform: uppercase; letter-spacing: 1px">City</p>
+                      <p style="margin: 0; font-size: 16px; color: #ffffff">{{city}}</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Project details -->
+            <tr>
+              <td style="padding: 20px 32px 8px">
+                <p
+                  style="
+                    margin: 0 0 14px;
+                    font-size: 11px;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    color: #d4af37;
+                    font-weight: 600;
+                  "
+                >
+                  Project Details
+                </p>
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  style="
+                    background-color: #0a0a0a;
+                    border: 1px solid #2a2a2a;
+                    border-radius: 10px;
+                  "
+                >
+                  <tr>
+                    <td width="50%" style="padding: 16px 18px; border-bottom: 1px solid #222222; border-right: 1px solid #222222; vertical-align: top">
+                      <p style="margin: 0 0 4px; font-size: 11px; color: #808080; text-transform: uppercase; letter-spacing: 1px">Project Type</p>
+                      <p style="margin: 0; font-size: 16px; color: #ffffff">{{project_type}}</p>
+                    </td>
+                    <td width="50%" style="padding: 16px 18px; border-bottom: 1px solid #222222; vertical-align: top">
+                      <p style="margin: 0 0 4px; font-size: 11px; color: #808080; text-transform: uppercase; letter-spacing: 1px">Best Time to Call</p>
+                      <p style="margin: 0; font-size: 16px; color: #ffffff">{{best_time_to_call}}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" style="padding: 16px 18px">
+                      <p style="margin: 0 0 8px; font-size: 11px; color: #808080; text-transform: uppercase; letter-spacing: 1px">Project Brief</p>
+                      <div
+                        style="
+                          white-space: pre-wrap;
+                          background-color: #111111;
+                          border: 1px solid #2a2a2a;
+                          border-radius: 8px;
+                          padding: 14px 16px;
+                          font-size: 15px;
+                          line-height: 1.7;
+                          color: #e8e8e8;
+                        "
+                      >
+                        {{message}}
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- CTA -->
+            <tr>
+              <td style="padding: 24px 32px 32px">
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                >
+                  <tr>
+                    <td
+                      style="
+                        border-radius: 6px;
+                        background: linear-gradient(135deg, #d4af37 0%, #f4e5b2 100%);
+                      "
+                    >
+                      <a
+                        href="mailto:{{from_email}}"
+                        style="
+                          display: inline-block;
+                          padding: 12px 22px;
+                          font-size: 13px;
+                          font-weight: 700;
+                          letter-spacing: 1px;
+                          text-transform: uppercase;
+                          color: #000000;
+                          text-decoration: none;
+                        "
+                      >
+                        Reply to {{from_name}}
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td
+                style="
+                  padding: 20px 32px;
+                  background-color: #0a0a0a;
+                  border-top: 1px solid #2a2a2a;
+                  text-align: center;
+                "
+              >
+                <p style="margin: 0; font-size: 12px; line-height: 1.6; color: #808080">
+                  This email was automatically generated by the Sparklus Lamps website.
+                </p>
+                <p style="margin: 8px 0 0; font-size: 12px; color: #666666">
+                  © Sparklus Lamps · contact@sparkluslamps.com
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
