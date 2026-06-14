@@ -174,6 +174,63 @@ const ProcessIcon = ({ type }) => {
   }
 };
 
+const ProcessStepContent = ({ step }) => (
+  <>
+    <div className="contact-process-icon">
+      <ProcessIcon type={step.icon} />
+    </div>
+    <h3>{step.title}</h3>
+    <p>{step.description}</p>
+  </>
+);
+
+const isExternalHref = (href) =>
+  href.startsWith("http") ||
+  href.startsWith("tel:") ||
+  href.startsWith("mailto:");
+
+const ContactProcessStep = ({ step, index }) => {
+  const motionProps = {
+    className: `contact-process-step${
+      step.href ? " contact-process-step-action" : ""
+    }`,
+    ...fadeInUp,
+    transition: { delay: index * 0.06 },
+  };
+
+  if (step.href) {
+    if (
+      step.external ||
+      isExternalHref(step.href) ||
+      step.href.startsWith("#")
+    ) {
+      return (
+        <motion.a
+          {...motionProps}
+          href={step.href}
+          target={step.href.startsWith("http") ? "_blank" : undefined}
+          rel={step.href.startsWith("http") ? "noopener noreferrer" : undefined}
+          aria-label={step.title}
+        >
+          <ProcessStepContent step={step} />
+        </motion.a>
+      );
+    }
+
+    return (
+      <motion.a {...motionProps} href={step.href} aria-label={step.title}>
+        <ProcessStepContent step={step} />
+      </motion.a>
+    );
+  }
+
+  return (
+    <motion.div {...motionProps}>
+      <ProcessStepContent step={step} />
+    </motion.div>
+  );
+};
+
 const TimelineArrow = () => (
   <svg
     className="contact-timeline-arrow"
@@ -215,7 +272,9 @@ const ContactUs = () => {
             <span className="contact-label">{hero.label}</span>
             <h1 className="contact-hero-title">
               {hero.title.before}
-              <span className="contact-hero-highlight">{hero.title.highlight}</span>
+              <span className="contact-hero-highlight">
+                {hero.title.highlight}
+              </span>
             </h1>
             <span className="contact-hero-star" aria-hidden="true">
               ✦
@@ -226,7 +285,10 @@ const ContactUs = () => {
       </section>
 
       {/* Conversation + Form */}
-      <section className="contact-section contact-section-dark contact-enquiry">
+      <section
+        id="project-enquiry"
+        className="contact-section contact-section-dark contact-enquiry"
+      >
         <div className="container contact-enquiry-grid">
           <motion.div className="contact-conversation" {...fadeInUp}>
             <div className="section-title contact-column-title">
@@ -247,7 +309,9 @@ const ContactUs = () => {
                           {item.value}
                         </a>
                       ) : (
-                        <span className="contact-detail-value">{item.value}</span>
+                        <span className="contact-detail-value">
+                          {item.value}
+                        </span>
                       )}
                     </div>
                   </li>
@@ -256,7 +320,11 @@ const ContactUs = () => {
             </ul>
           </motion.div>
 
-          <motion.div className="contact-enquiry-form" {...fadeInUp} transition={{ delay: 0.1 }}>
+          <motion.div
+            className="contact-enquiry-form"
+            {...fadeInUp}
+            transition={{ delay: 0.1 }}
+          >
             <CustomizationForm variant="contact" />
           </motion.div>
         </div>
@@ -338,7 +406,10 @@ const ContactUs = () => {
       {/* Process */}
       <section className="contact-section contact-section-dark contact-process">
         <div className="container">
-          <motion.div className="section-title contact-process-header" {...fadeInUp}>
+          <motion.div
+            className="section-title contact-process-header"
+            {...fadeInUp}
+          >
             <h2>{process.heading}</h2>
           </motion.div>
 
@@ -346,19 +417,12 @@ const ContactUs = () => {
             <div className="contact-process-timeline">
               {process.steps.map((step, index) => (
                 <React.Fragment key={step.id}>
-                  <motion.div
-                    className="contact-process-step"
-                    {...fadeInUp}
-                    transition={{ delay: index * 0.06 }}
-                  >
-                    <div className="contact-process-icon">
-                      <ProcessIcon type={step.icon} />
-                    </div>
-                    <h3>{step.title}</h3>
-                    <p>{step.description}</p>
-                  </motion.div>
+                  <ContactProcessStep step={step} index={index} />
                   {index < process.steps.length - 1 && (
-                    <div className="contact-timeline-connector" aria-hidden="true">
+                    <div
+                      className="contact-timeline-connector"
+                      aria-hidden="true"
+                    >
                       <span className="contact-timeline-line" />
                       <TimelineArrow />
                     </div>
@@ -372,6 +436,7 @@ const ContactUs = () => {
 
       {/* Bottom CTA */}
       <section
+        id="bring-your-vision-to-light"
         className="contact-section contact-section-dark contact-bottom-cta"
         style={{ backgroundImage: `url(${bottomCta.accentImage})` }}
       >

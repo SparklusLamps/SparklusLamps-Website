@@ -35,8 +35,8 @@ function App() {
               <Hero />
               {/* <About /> */}
               {/* <Statistics /> */}
-              <CustomizationVision />
               <PastWorks />
+              <CustomizationVision />
               <CollaborationProcess />
               <CollaborationHub />
               {/* <Products /> */}

@@ -117,9 +117,26 @@
   flex-shrink: 0;
 }
 
-.process-step:hover .process-step-icon {
+.process-step:hover .process-step-icon,
+.process-step-action:hover .process-step-icon,
+.process-step-link:hover .process-step-icon {
   border-color: var(--accent-gold);
   box-shadow: 0 0 24px rgba(212, 175, 55, 0.15);
+}
+
+.process-step-action,
+.process-step-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+
+.process-step-action:focus-visible,
+.process-step-link:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 4px;
+  border-radius: 8px;
 }
 
 .process-step h3 {

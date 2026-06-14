@@ -1,5 +1,6 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import FloatingContactIcons from "../components/FloatingContactIcons/FloatingContactIcons";
@@ -55,6 +56,41 @@ const fadeInUp = {
 
 const AboutUs = () => {
   const { hero, ourStory, production, workshop, team, values } = aboutPage;
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+
+  const showPrevImage = useCallback(() => {
+    setLightboxIndex((current) =>
+      current === null
+        ? null
+        : (current - 1 + workshop.images.length) % workshop.images.length
+    );
+  }, [workshop.images.length]);
+
+  const showNextImage = useCallback(() => {
+    setLightboxIndex((current) =>
+      current === null ? null : (current + 1) % workshop.images.length
+    );
+  }, [workshop.images.length]);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft") showPrevImage();
+      if (event.key === "ArrowRight") showNextImage();
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [lightboxIndex, closeLightbox, showPrevImage, showNextImage]);
 
   return (
     <div className="about-page">
@@ -110,18 +146,77 @@ const AboutUs = () => {
           </motion.div>
           <div className="about-workshop-grid">
             {workshop.images.map((image, index) => (
-              <motion.div
+              <motion.button
                 key={`${image}-${index}`}
+                type="button"
                 className="about-workshop-item"
                 {...fadeInUp}
                 transition={{ delay: index * 0.04 }}
+                onClick={() => setLightboxIndex(index)}
+                aria-label={`Open workshop photo ${index + 1}`}
               >
                 <img src={image} alt={`Workshop moment ${index + 1}`} />
-              </motion.div>
+              </motion.button>
             ))}
           </div>
         </div>
       </section>
+
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <motion.div
+            className="about-workshop-lightbox"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeLightbox}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Workshop photo viewer"
+          >
+            <motion.div
+              className="about-workshop-lightbox-content"
+              initial={{ scale: 0.94, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.94, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="about-lightbox-close"
+                onClick={closeLightbox}
+                aria-label="Close photo viewer"
+              >
+                <FaTimes />
+              </button>
+              <button
+                type="button"
+                className="about-lightbox-nav about-lightbox-prev"
+                onClick={showPrevImage}
+                aria-label="Previous photo"
+              >
+                <FaChevronLeft />
+              </button>
+              <img
+                src={workshop.images[lightboxIndex]}
+                alt={`Workshop moment ${lightboxIndex + 1}`}
+              />
+              <button
+                type="button"
+                className="about-lightbox-nav about-lightbox-next"
+                onClick={showNextImage}
+                aria-label="Next photo"
+              >
+                <FaChevronRight />
+              </button>
+              <p className="about-lightbox-counter">
+                {lightboxIndex + 1} / {workshop.images.length}
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Team */}
       <section className="about-section about-section-dark about-team">
