@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { heroContent } from "../../constants";
+import { heroContent, siteActions } from "../../constants";
 import FloatingContactIcons from "../FloatingContactIcons/FloatingContactIcons";
 import BrochureModal from "../BrochureModal/BrochureModal";
 import "./Hero.css";
 
 const Hero = () => {
   const [isBrochureOpen, setIsBrochureOpen] = useState(false);
+  const openBrochureModal = heroContent.ctaBehavior === "modal";
 
   return (
     <section id="home" className="hero-section">
@@ -60,17 +62,31 @@ const Hero = () => {
             {heroContent.description}
           </motion.p>
 
-          <motion.button
-            className="btn btn-primary hero-cta"
-            onClick={() => setIsBrochureOpen(true)}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {heroContent.ctaText}
-          </motion.button>
+          {openBrochureModal ? (
+            <motion.button
+              className="btn btn-primary hero-cta"
+              onClick={() => setIsBrochureOpen(true)}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {heroContent.ctaText}
+            </motion.button>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link to={siteActions.visionCta} className="btn btn-primary hero-cta">
+                {heroContent.ctaText}
+              </Link>
+            </motion.div>
+          )}
         </motion.div>
 
         <FloatingContactIcons />

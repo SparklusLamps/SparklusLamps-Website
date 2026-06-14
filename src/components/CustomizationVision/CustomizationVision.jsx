@@ -35,7 +35,7 @@ const CustomizationVision = () => {
               key={card.step}
               className={`customization-card ${
                 card.layout === "image-right" ? "image-right" : ""
-              }`}
+              } ${card.optionsType ? `customization-card--${card.optionsType}` : ""}`}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}

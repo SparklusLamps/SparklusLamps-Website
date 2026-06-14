@@ -22,6 +22,14 @@ export const floatingContactIcons = {
     "https://wa.me/+919548559548?text=Hi,%20I%E2%80%99m%20looking%20for%20customized%20lighting%20fixtures%20for%20my%20space/project.",
 };
 
+export const siteActions = {
+  projectEnquiry: "/contact-us#project-enquiry",
+  visionCta: "/contact-us#bring-your-vision-to-light",
+  phone: "tel:+919548559548",
+  whatsappConsultation:
+    "https://wa.me/919548559548?text=Hi%20Sparklus%20Lamps%2C%20I%27d%20like%20to%20book%20a%20consultation.",
+};
+
 // About Us Page
 export const aboutPage = {
   hero: {
@@ -217,18 +225,22 @@ export const contactPage = {
         icon: "submit",
         title: "Submit Enquiry",
         description: "Share your project details through the form.",
+        href: "#project-enquiry",
       },
       {
         id: 2,
         icon: "call",
-        title: "Discovery Call",
+        title: "Consultation Call",
         description: "We understand your vision, space, and requirements.",
+        href: siteActions.phone,
       },
       {
         id: 3,
         icon: "design",
         title: "Design Consultation",
         description: "We explore materials, finishes, and custom options.",
+        href: siteActions.whatsappConsultation,
+        external: true,
       },
       {
         id: 4,
@@ -303,6 +315,8 @@ export const heroContent = {
   description:
     "We partner with interior designers, architects, and project teams to create handcrafted lighting fixtures tailored to spaces, concepts, and moods.",
   ctaText: "View Brochure",
+  // "redirect" — Contact Us vision CTA section | "modal" — in-page brochure viewer
+  ctaBehavior: "redirect",
   tags: ["Handmade", "Customizable", "Sustainable"],
 };
 
@@ -504,6 +518,7 @@ export const collaborationProcess = {
       description:
         "Share your project brief, dimensions, inspiration and requirements.",
       connector: "01",
+      href: siteActions.projectEnquiry,
     },
     {
       id: 2,
@@ -512,6 +527,8 @@ export const collaborationProcess = {
       description:
         "We understand your space, discuss lighting needs and explore custom solutions.",
       connector: "02",
+      href: siteActions.whatsappConsultation,
+      external: true,
     },
     {
       id: 3,
@@ -563,6 +580,10 @@ export const pastWorks = [
     title: "Twisted OriFold",
     location: "Hyderabad, India",
     description: "Waterfront property with custom LED ambience lighting",
+    clientRequirements:
+      "A statement pendant for a waterfront living room with warm ambient light, sculptural form, and a scale that anchors the double-height ceiling without overpowering the view.",
+    ourSolution:
+      "We crafted the Twisted OriFold in handmade paper with integrated LED diffusion, custom sizing for the ceiling height, and a soft gold interior wash to complement the waterfront palette.",
     image: "/images/work4.png",
     year: "2024",
   },
@@ -572,6 +593,10 @@ export const pastWorks = [
     location: "Lucknow, India",
     description:
       "Luxury chandelier installation featuring custom crystal designs",
+    clientRequirements:
+      "A dramatic cluster installation for a luxury residence foyer — multiple drops, jewel-like highlights, and a layout that fills vertical volume while staying refined.",
+    ourSolution:
+      "Falling Stars was built as a multi-drop cotton paper composition with layered silhouettes, bespoke drop lengths, and warm LED placement to create depth and movement in the entry.",
     image: "/images/w1.jpg",
     year: "2024",
   },
@@ -581,6 +606,10 @@ export const pastWorks = [
     location: "Toronto, Canada",
     description:
       "Designed to soften your space, the Solace Dome Lamp features a sculptural dome silhouette handcrafted from cotton paper",
+    clientRequirements:
+      "Soft, diffused lighting for a contemporary bedroom retreat — minimal visual weight, calming glow, and a dome form that feels sculptural yet quiet.",
+    ourSolution:
+      "The Solace Dome was hand-formed in cotton paper with a wide diffusion profile, custom diameter for the bedside zone, and a muted finish to soften the room without glare.",
     image: "/images/work2.jpg",
     year: "2023",
   },
@@ -589,6 +618,10 @@ export const pastWorks = [
     title: "the Bends",
     location: "Lucknow, India",
     description: "Bespoke theatrical lighting installation",
+    clientRequirements:
+      "Expressive, directional lighting for a hospitality lounge — bold curves, theatrical presence, and finishes that hold up to evening service.",
+    ourSolution:
+      "the Bends combines folded paper geometry with targeted LED accents, custom bend radii for the ceiling run, and a durable finish suited to high-traffic hospitality use.",
     image: "/images/work3.jpg",
     year: "2023",
   },
@@ -694,7 +727,7 @@ export const faqs = [
     id: 2,
     question: "What materials do you use in your lamps?",
     answer:
-      "We use premium handmade cotton paper, known for its durability, translucence, and natural texture. The frames and fittings are made with high-quality metal or wood, ensuring both beauty and longevity.",
+      "We craft each lamp using sustainable, premium materials you can choose to suit your space. For the shade and body, we offer Handmade Paper, Jute, and Cotton Cloth — each with its own natural texture and warm, diffused glow. You can further personalize every piece with our Surface & Finish options: Custom Colours, Custom Prints, and Paper Textures. Frames and fittings are made with high-quality metal or wood for lasting beauty and durability.",
   },
   {
     id: 3,

@@ -456,6 +456,25 @@ a.contact-detail-value:hover {
   height: 32px;
 }
 
+.contact-process-step-action {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.contact-process-step-action:hover .contact-process-icon {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.15);
+}
+
+.contact-process-step-action:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
 .contact-process-step h3 {
   font-family: var(--font-primary);
   font-size: 0.78rem;

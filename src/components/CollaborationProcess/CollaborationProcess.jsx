@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { collaborationProcess } from "../../constants";
@@ -81,6 +82,21 @@ const ProcessIcon = ({ type }) => {
   }
 };
 
+const ProcessStepContent = ({ step }) => (
+  <>
+    <div className="process-step-icon">
+      <ProcessIcon type={step.icon} />
+    </div>
+    <h3>{step.title}</h3>
+    <p>{step.description}</p>
+  </>
+);
+
+const isExternalHref = (href) =>
+  href.startsWith("http") ||
+  href.startsWith("tel:") ||
+  href.startsWith("mailto:");
+
 const TimelineArrow = () => (
   <svg
     className="timeline-arrow-icon"
@@ -92,20 +108,44 @@ const TimelineArrow = () => (
   </svg>
 );
 
-const ProcessStep = ({ step, inView, delay }) => (
-  <motion.div
-    className="process-step"
-    initial={{ opacity: 0, y: 24 }}
-    animate={inView ? { opacity: 1, y: 0 } : {}}
-    transition={{ duration: 0.5, delay }}
-  >
-    <div className="process-step-icon">
-      <ProcessIcon type={step.icon} />
-    </div>
-    <h3>{step.title}</h3>
-    <p>{step.description}</p>
-  </motion.div>
-);
+const ProcessStep = ({ step, inView, delay }) => {
+  const motionProps = {
+    className: `process-step${step.href ? " process-step-action" : ""}`,
+    initial: { opacity: 0, y: 24 },
+    animate: inView ? { opacity: 1, y: 0 } : {},
+    transition: { duration: 0.5, delay },
+  };
+
+  if (step.href) {
+    if (step.external || isExternalHref(step.href) || step.href.startsWith("#")) {
+      return (
+        <motion.a
+          {...motionProps}
+          href={step.href}
+          target={step.href.startsWith("http") ? "_blank" : undefined}
+          rel={step.href.startsWith("http") ? "noopener noreferrer" : undefined}
+          aria-label={step.title}
+        >
+          <ProcessStepContent step={step} />
+        </motion.a>
+      );
+    }
+
+    return (
+      <motion.div {...motionProps}>
+        <Link to={step.href} className="process-step-link" aria-label={step.title}>
+          <ProcessStepContent step={step} />
+        </Link>
+      </motion.div>
+    );
+  }
+
+  return (
+    <motion.div {...motionProps}>
+      <ProcessStepContent step={step} />
+    </motion.div>
+  );
+};
 
 const TimelineConnector = ({ number, inView, delay }) => (
   <motion.div
