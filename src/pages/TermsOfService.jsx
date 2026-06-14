@@ -101,7 +101,7 @@ const TermsOfService = () => {
             <br />
             <strong>Email:</strong> contact@sparkluslamps.com
             <br />
-            <strong>Phone:</strong> +91 9548218100
+            <strong>Phone:</strong> +91 9548559548
           </p>
         </section>
       </div>

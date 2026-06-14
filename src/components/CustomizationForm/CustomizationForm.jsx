@@ -2,29 +2,61 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import emailjs from "emailjs-com";
-import { emailJSConfig } from "../../constants";
-import { FaPaperPlane } from "react-icons/fa";
+import { FaWhatsapp, FaCloudUploadAlt } from "react-icons/fa";
+import {
+  emailJSConfig,
+  collaborationForm,
+  contactForm,
+} from "../../constants";
 import "./CustomizationForm.css";
 
-const CustomizationForm = () => {
+const CustomizationForm = ({ embedded = false, variant = "collaboration" }) => {
+  const isContact = variant === "contact";
+  const formConfig = isContact ? contactForm : collaborationForm;
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const {
+    title,
+    fields,
+    projectTypes,
+    submitText,
+    uploadLabel = "",
+    uploadHint = "",
+    whatsappNumber = "",
+    whatsappMessage = "",
+    quantityOptions = [],
+    bestTimeOptions = [],
+  } = formConfig;
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phoneCountry: "+91",
-    phoneNumber: "",
-    city: "",
-    serviceType: "home",
-    fixtures: [],
-    dimensions: "",
-    customNeed: "",
-  });
+  const [formData, setFormData] = useState(
+    isContact
+      ? {
+          name: "",
+          city: "",
+          email: "",
+          phone: "",
+          projectType: "",
+          bestTimeToCall: "",
+          message: "",
+        }
+      : {
+          name: "",
+          studioName: "",
+          projectType: "",
+          projectLocation: "",
+          estimatedQuantity: "",
+          timeline: "",
+        }
+  );
+
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef(null);
+  const timeoutRef = useRef(null);
 
   const [status, setStatus] = useState({
     loading: false,
@@ -39,76 +71,151 @@ const CustomizationForm = () => {
     });
   };
 
-  const toggleFixture = (fixture) => {
-    setFormData((prev) => {
-      const set = new Set(prev.fixtures || []);
-      if (set.has(fixture)) set.delete(fixture);
-      else set.add(fixture);
-      return { ...prev, fixtures: Array.from(set) };
-    });
+  const handleFiles = (files) => {
+    const fileList = Array.from(files || []);
+    if (!fileList.length) return;
+    setSelectedFiles((prev) => [...prev, ...fileList].slice(0, 5));
+  };
+
+  const handleFileChange = (e) => {
+    handleFiles(e.target.files);
+    e.target.value = "";
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => setIsDragging(false);
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+    handleFiles(e.dataTransfer.files);
+  };
+
+  const resetForm = () => {
+    if (isContact) {
+      setFormData({
+        name: "",
+        city: "",
+        email: "",
+        phone: "",
+        projectType: "",
+        bestTimeToCall: "",
+        message: "",
+      });
+    } else {
+      setFormData({
+        name: "",
+        studioName: "",
+        projectType: "",
+        projectLocation: "",
+        estimatedQuantity: "",
+        timeline: "",
+      });
+      setSelectedFiles([]);
+    }
+  };
+
+  const buildWhatsAppLink = () => {
+    const text = isContact
+      ? [
+          "Hi Sparklus Lamps, I'd like to discuss my project:",
+          `Name: ${formData.name}`,
+          `City: ${formData.city}`,
+          `Email: ${formData.email}`,
+          `Phone: ${formData.phone}`,
+          `Project Type: ${formData.projectType}`,
+          `Best Time to Call: ${formData.bestTimeToCall}`,
+          `Message: ${formData.message}`,
+        ]
+      : [
+          whatsappMessage,
+          `Name: ${formData.name}`,
+          `Studio: ${formData.studioName}`,
+          `Project Type: ${formData.projectType}`,
+          `Location: ${formData.projectLocation}`,
+          `Quantity: ${formData.estimatedQuantity}`,
+          `Timeline: ${formData.timeline}`,
+          selectedFiles.length
+            ? `Files: ${selectedFiles.map((f) => f.name).join(", ")}`
+            : "",
+        ];
+
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      text.filter(Boolean).join("\n")
+    )}`;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus({ loading: true, message: "", type: "" });
 
+    const fileNames = selectedFiles.map((f) => f.name).join(", ");
+
     try {
-      // Ensure EmailJS is initialized (some SDKs require init)
       if (emailjs && typeof emailjs.init === "function") {
         try {
           emailjs.init(emailJSConfig.publicKey);
-        } catch (initErr) {
-          // init may already have been called elsewhere; ignore
+        } catch {
+          /* already initialized */
         }
       }
 
-      // Clean up template params
-      // prepare fixtures as comma-separated string
-      const fixturesList = (formData.fixtures || []).join(", ");
+      const templateParams = isContact
+        ? {
+            from_name: (formData.name || "").trim(),
+            from_email: (formData.email || "").trim(),
+            phone_number: (formData.phone || "").trim(),
+            city: (formData.city || "").trim(),
+            project_type: (formData.projectType || "").trim(),
+            best_time_to_call: (formData.bestTimeToCall || "").trim(),
+            message: (formData.message || "").trim(),
+          }
+        : {
+            from_name: (formData.name || "").trim(),
+            from_email: "",
+            phone_country: "",
+            phone_number: "",
+            city: (formData.projectLocation || "").trim(),
+            service_type: (formData.projectType || "").trim(),
+            fixtures: (formData.studioName || "").trim(),
+            dimensions: `Qty: ${(formData.estimatedQuantity || "").trim()}`,
+            message: [
+              `Studio: ${(formData.studioName || "").trim()}`,
+              `Project Type: ${(formData.projectType || "").trim()}`,
+              `Location: ${(formData.projectLocation || "").trim()}`,
+              `Estimated Quantity: ${(formData.estimatedQuantity || "").trim()}`,
+              `Timeline: ${(formData.timeline || "").trim()}`,
+              fileNames ? `Mood Board Files: ${fileNames}` : "",
+            ]
+              .filter(Boolean)
+              .join("\n"),
+          };
 
-      const templateParams = {
-        from_name: (formData.name || "").trim(),
-        from_email: (formData.email || "").trim(),
-        phone_country: (formData.phoneCountry || "").trim(),
-        phone_number: (formData.phoneNumber || "").trim(),
-        city: (formData.city || "").trim(),
-        service_type: (formData.serviceType || "").trim(),
-        fixtures: fixturesList,
-        dimensions: (formData.dimensions || "").trim(),
-        message: (formData.customNeed || "").trim(),
-      };
-
-      // EmailJS send
-      console.log("EmailJS: sending", templateParams);
-      const sendResult = await emailjs.send(
+      await emailjs.send(
         emailJSConfig.serviceID,
         emailJSConfig.templateID,
         templateParams,
         emailJSConfig.publicKey
       );
-      console.log("EmailJS send result:", sendResult);
 
       setStatus({
         loading: false,
-        message:
-          "Your customization request has been sent successfully! We will contact you soon.",
+        message: isContact
+          ? "Your enquiry has been sent successfully! We will contact you soon."
+          : "Your project details have been sent successfully! We will contact you soon.",
         type: "success",
       });
 
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        phoneCountry: "+91",
-        phoneNumber: "",
-        city: "",
-        serviceType: "home",
-        fixtures: [],
-        dimensions: "",
-        customNeed: "",
-      });
+      resetForm();
+
+      if (!isContact) {
+        window.open(buildWhatsAppLink(), "_blank", "noopener,noreferrer");
+      }
     } catch (error) {
-      // log full error for debugging, but show only generic message to the user
       console.error("EmailJS send error:", error);
       setStatus({
         loading: false,
@@ -116,323 +223,331 @@ const CustomizationForm = () => {
           "Failed to send your request. Please try again or contact us directly.",
         type: "error",
       });
-      // Also clear the form on failure per user request
-      setFormData({
-        name: "",
-        email: "",
-        phoneCountry: "+91",
-        phoneNumber: "",
-        city: "",
-        serviceType: "home",
-        fixtures: [],
-        dimensions: "",
-        customNeed: "",
-      });
     }
 
-    // Clear message after 5 seconds (store timeout ref so we can clear on unmount)
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setStatus({ loading: false, message: "", type: "" });
     }, 5000);
   };
 
-  // Initialize EmailJS once on mount (defensive)
   useEffect(() => {
     if (emailjs && typeof emailjs.init === "function") {
       try {
         emailjs.init(emailJSConfig.publicKey);
-      } catch (err) {
-        // ignore if already initialized
+      } catch {
+        /* ignore */
       }
     }
 
     return () => {
-      // cleanup any pending timeout
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
 
-  // ref to hold timeout id
-  const timeoutRef = useRef(null);
+  const collaborationFields = (
+    <>
+      <div className="collab-form-row">
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          className="collab-input"
+          placeholder={fields.name}
+          required
+          disabled={status.loading}
+        />
+        <input
+          type="text"
+          name="studioName"
+          value={formData.studioName}
+          onChange={handleChange}
+          className="collab-input"
+          placeholder={fields.studioName}
+          disabled={status.loading}
+        />
+      </div>
+
+      <div className="collab-form-row">
+        <select
+          name="projectType"
+          value={formData.projectType}
+          onChange={handleChange}
+          className="collab-input collab-select"
+          required
+          disabled={status.loading}
+        >
+          <option value="" disabled>
+            {fields.projectType}
+          </option>
+          {projectTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+        <input
+          type="text"
+          name="projectLocation"
+          value={formData.projectLocation}
+          onChange={handleChange}
+          className="collab-input"
+          placeholder={fields.projectLocation}
+          disabled={status.loading}
+        />
+      </div>
+
+      <div className="collab-form-row">
+        <input
+          type="text"
+          name="estimatedQuantity"
+          value={formData.estimatedQuantity}
+          onChange={handleChange}
+          className="collab-input"
+          placeholder={fields.estimatedQuantity}
+          disabled={status.loading}
+        />
+        <input
+          type="text"
+          name="timeline"
+          value={formData.timeline}
+          onChange={handleChange}
+          className="collab-input"
+          placeholder={fields.timeline}
+          disabled={status.loading}
+        />
+      </div>
+
+      <div
+        className={`collab-upload ${isDragging ? "dragging" : ""}`}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        onClick={() => fileInputRef.current?.click()}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            fileInputRef.current?.click();
+          }
+        }}
+      >
+        <input
+          ref={fileInputRef}
+          type="file"
+          multiple
+          accept="image/*,.pdf"
+          onChange={handleFileChange}
+          className="collab-file-input"
+          disabled={status.loading}
+        />
+        <FaCloudUploadAlt className="upload-icon" />
+        <p className="upload-label">{uploadLabel}</p>
+        <p className="upload-hint">{uploadHint}</p>
+        {selectedFiles.length > 0 && (
+          <p className="upload-files">
+            {selectedFiles.map((f) => f.name).join(", ")}
+          </p>
+        )}
+      </div>
+    </>
+  );
+
+  const contactFields = (
+    <>
+      <div className="collab-form-row">
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          className="collab-input"
+          placeholder={fields.name}
+          required
+          disabled={status.loading}
+        />
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          className="collab-input"
+          placeholder={fields.email}
+          required
+          disabled={status.loading}
+        />
+      </div>
+
+      <div className="collab-form-row">
+        <input
+          type="tel"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          className="collab-input"
+          placeholder={fields.phone}
+          disabled={status.loading}
+        />
+        <input
+          type="text"
+          name="city"
+          value={formData.city}
+          onChange={handleChange}
+          className="collab-input"
+          placeholder={fields.city}
+          disabled={status.loading}
+        />
+      </div>
+
+      <div className="collab-form-row">
+        <select
+          name="projectType"
+          value={formData.projectType}
+          onChange={handleChange}
+          className="collab-input collab-select"
+          required
+          disabled={status.loading}
+        >
+          <option value="" disabled>
+            {fields.projectType}
+          </option>
+          {projectTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+        <select
+          name="bestTimeToCall"
+          value={formData.bestTimeToCall}
+          onChange={handleChange}
+          className="collab-input collab-select"
+          disabled={status.loading}
+        >
+          <option value="" disabled>
+            {fields.bestTimeToCall}
+          </option>
+          {bestTimeOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <textarea
+        name="message"
+        value={formData.message}
+        onChange={handleChange}
+        className="collab-input collab-textarea"
+        placeholder={fields.message}
+        rows={5}
+        disabled={status.loading}
+      />
+    </>
+  );
+
+  const formContent = (
+    <>
+      {isContact ? (
+        <div className="section-title contact-column-title">
+          <h2>{title}</h2>
+        </div>
+      ) : (
+        <h3 className="hub-column-title">{title}</h3>
+      )}
+
+      {isContact ? (
+        <form onSubmit={handleSubmit} className="collaboration-form contact-enquiry-form-fields">
+          {contactFields}
+
+          <button
+            type="submit"
+            className="collab-submit-btn contact-submit-btn"
+            disabled={status.loading}
+          >
+            {status.loading ? "Sending..." : submitText}
+          </button>
+        </form>
+      ) : (
+        <form onSubmit={handleSubmit} className="collaboration-form">
+          {collaborationFields}
+
+          <button
+            type="submit"
+            className="collab-submit-btn"
+            disabled={status.loading}
+          >
+            {status.loading ? "Sending..." : submitText}
+            <FaWhatsapp />
+          </button>
+        </form>
+      )}
+    </>
+  );
+
+  const toast = (
+    <AnimatePresence>
+      {status.message && (
+        <motion.div
+          className={`toast ${status.type}`}
+          initial={{ x: 300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: 300, opacity: 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          role="status"
+        >
+          <div className="toast-inner">
+            <div className="toast-header">
+              <span className="toast-brand">Sparklus Lamps</span>
+              <span className={`toast-status ${status.type}`}>
+                {status.type === "success" ? "Success" : "Error"}
+              </span>
+            </div>
+            <div className="toast-body">
+              <p>{status.message}</p>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+
+  if (embedded) {
+    return (
+      <div className="hub-column collaboration-form-column">
+        {formContent}
+        {toast}
+      </div>
+    );
+  }
+
+  if (isContact) {
+    return (
+      <div className="contact-form-panel">
+        {formContent}
+        {toast}
+      </div>
+    );
+  }
 
   return (
     <section className="section customization-form-section">
       <div className="container">
         <motion.div
-          className="section-title"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <h2>Need Customization?</h2>
-          <p className="section-subtitle">
-            Tell us about your unique lighting needs and let us create something
-            extraordinary for you
-          </p>
-        </motion.div>
-
-        <motion.div
           ref={ref}
-          className="form-container"
+          className="form-container standalone-form"
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          {!isExpanded && (
-            <motion.button
-              className="expand-form-btn"
-              onClick={() => setIsExpanded(true)}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="expand-icon">+</span>
-              <span className="expand-text">Get Custom Quote</span>
-            </motion.button>
-          )}
-
-          <AnimatePresence>
-            {isExpanded && (
-              <motion.div
-                initial={{ opacity: 0, height: 0, scale: 0.95 }}
-                animate={{ opacity: 1, height: "auto", scale: 1 }}
-                exit={{ opacity: 0, height: 0, scale: 0.95 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-                style={{ overflow: "hidden" }}
-              >
-                <motion.button
-                  className="collapse-form-btn"
-                  onClick={() => setIsExpanded(false)}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="collapse-icon">−</span>
-                  <span className="collapse-text">Close Form</span>
-                </motion.button>
-                <form onSubmit={handleSubmit} className="customization-form">
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="name" className="form-label">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="form-input"
-                        required
-                        disabled={status.loading}
-                        placeholder="John Doe"
-                      />
-                    </div>
-
-                    <div className="form-group phone-group">
-                      <label htmlFor="phoneNumber" className="form-label">
-                        Phone Number *
-                      </label>
-                      <div className="phone-row">
-                        <select
-                          name="phoneCountry"
-                          value={formData.phoneCountry}
-                          onChange={handleChange}
-                          disabled={status.loading}
-                          className="phone-select"
-                          aria-label="Country code"
-                        >
-                          <option value="+91">🇮🇳 +91</option>
-                          <option value="+1">🇺🇸 +1</option>
-                          <option value="+44">🇬🇧 +44</option>
-                          <option value="+61">🇦🇺 +61</option>
-                          <option value="+49">🇩🇪 +49</option>
-                        </select>
-                        <input
-                          type="tel"
-                          id="phoneNumber"
-                          name="phoneNumber"
-                          value={formData.phoneNumber}
-                          onChange={handleChange}
-                          className="form-input phone-input"
-                          required
-                          disabled={status.loading}
-                          placeholder="8012345678"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="email" className="form-label">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="form-input"
-                        required
-                        disabled={status.loading}
-                        placeholder="john@example.com"
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="city" className="form-label">
-                        City
-                      </label>
-                      <input
-                        type="text"
-                        id="city"
-                        name="city"
-                        value={formData.city}
-                        onChange={handleChange}
-                        className="form-input"
-                        placeholder="Mumbai"
-                        disabled={status.loading}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="serviceType" className="form-label">
-                        Type of Service Required
-                      </label>
-                      <select
-                        id="serviceType"
-                        name="serviceType"
-                        value={formData.serviceType}
-                        onChange={handleChange}
-                        className="form-input"
-                        disabled={status.loading}
-                      >
-                        <option value="home">Home</option>
-                        <option value="restaurant">Restaurant</option>
-                        <option value="hotel">Hotel</option>
-                        <option value="office">Office</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-
-                    <div className="form-group">
-                      <label className="form-label">
-                        Type of Fixture Required
-                      </label>
-                      <div className="fixtures-grid">
-                        {[
-                          "pendant",
-                          "floor",
-                          "table",
-                          "wall",
-                          "custom idea",
-                        ].map((f) => (
-                          <label key={f} className="fixture-item">
-                            <input
-                              type="checkbox"
-                              name="fixtures"
-                              value={f}
-                              checked={(formData.fixtures || []).includes(f)}
-                              onChange={() => toggleFixture(f)}
-                              disabled={status.loading}
-                            />
-                            <span className="fixture-label">{f}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="dimensions" className="form-label">
-                      Size / Dimensions (optional)
-                    </label>
-                    <input
-                      type="text"
-                      id="dimensions"
-                      name="dimensions"
-                      value={formData.dimensions}
-                      onChange={handleChange}
-                      className="form-input"
-                      placeholder="e.g., 120cm x 40cm x 30cm"
-                      disabled={status.loading}
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="customNeed" className="form-label">
-                      Describe Your Custom Need (optional)
-                    </label>
-                    <textarea
-                      id="customNeed"
-                      name="customNeed"
-                      value={formData.customNeed}
-                      onChange={handleChange}
-                      className="form-textarea"
-                      disabled={status.loading}
-                      rows="6"
-                      placeholder="Tell us about your project, space dimensions, design preferences, and any specific requirements..."
-                    />
-                  </div>
-
-                  {/* status message removed from inline form; toast appears in top-right */}
-
-                  <motion.button
-                    type="submit"
-                    className="btn btn-primary submit-btn"
-                    disabled={status.loading}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {status.loading ? (
-                      "Sending..."
-                    ) : (
-                      <>
-                        <span>Send Request</span>
-                        {/* <FaPaperPlane /> */}
-                      </>
-                    )}
-                  </motion.button>
-                </form>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <div className="hub-column collaboration-form-column standalone">
+            {formContent}
+          </div>
         </motion.div>
-        {/* Toast - top-right */}
-        <AnimatePresence>
-          {status.message && (
-            <motion.div
-              className={`toast ${status.type}`}
-              initial={{ x: 300, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 300, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              role="status"
-            >
-              <div className="toast-inner">
-                <div className="toast-header">
-                  <span className="toast-brand">Sparklus Lamps</span>
-                  <span className={`toast-status ${status.type}`}>
-                    {status.type === "success" ? "Success" : "Error"}
-                  </span>
-                </div>
-                <div className="toast-body">
-                  <p>{status.message}</p>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {toast}
       </div>
     </section>
   );

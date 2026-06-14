@@ -1,0 +1,232 @@
+.customization-vision-section {
+  background: var(--primary-bg);
+}
+
+.customization-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 40px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.customization-card {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 30px;
+  background: var(--primary-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.customization-card.image-right .customization-image {
+  order: 2;
+}
+
+.customization-card.image-right .customization-content {
+  order: 1;
+}
+
+.customization-image {
+  background: var(--primary-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+  min-width: 0;
+}
+
+.customization-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.customization-content {
+  padding: 28px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.customization-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.customization-step {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  color: var(--primary-bg);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.customization-content h3 {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-bottom: 0;
+  font-family: var(--font-heading);
+}
+
+.customization-content p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 18px;
+  font-size: 1rem;
+}
+
+.customization-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 2.5vw, 20px);
+  width: 100%;
+  justify-items: center;
+  align-items: start;
+}
+
+.customization-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 160px;
+  text-align: center;
+}
+
+.option-swatch {
+  width: clamp(52px, 6vw, 68px);
+  height: clamp(52px, 6vw, 68px);
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  overflow: hidden;
+  background: #151515;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.option-swatch img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.option-size-image {
+  border-radius: 6px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #151515;
+}
+
+.option-size-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.option-label {
+  color: var(--text-secondary);
+  font-size: clamp(0.72rem, 2.2vw, 0.85rem);
+  line-height: 1.35;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .customization-card {
+    grid-template-columns: 1fr;
+  }
+
+  .customization-cards {
+    max-width: 760px;
+  }
+
+  .customization-card.image-right .customization-image,
+  .customization-card.image-right .customization-content {
+    order: unset;
+  }
+
+  .customization-image {
+    min-height: 0;
+    padding: clamp(12px, 3vw, 20px);
+  }
+
+  .customization-image img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 768px) {
+  .customization-content {
+    padding: 24px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .customization-header {
+    justify-content: center;
+  }
+
+  .customization-options {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(10px, 3vw, 16px);
+    max-width: 100%;
+  }
+
+  .customization-option {
+    max-width: none;
+  }
+
+  .customization-cards {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .customization-image {
+    padding: 10px 8px;
+  }
+
+  .customization-options {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .customization-option {
+    max-width: 180px;
+    margin: 0 auto;
+  }
+
+  .option-swatch {
+    width: clamp(56px, 16vw, 64px);
+    height: clamp(56px, 16vw, 64px);
+  }
+
+  .option-label {
+    font-size: 0.82rem;
+  }
+}

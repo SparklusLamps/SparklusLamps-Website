@@ -1,22 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { heroContent } from "../../constants";
-import {
-  FaFacebook,
-  FaInstagram,
-  FaTwitter,
-  FaWhatsapp,
-  FaPhone,
-} from "react-icons/fa";
+import FloatingContactIcons from "../FloatingContactIcons/FloatingContactIcons";
+import BrochureModal from "../BrochureModal/BrochureModal";
 import "./Hero.css";
 
 const Hero = () => {
-  const scrollToProducts = () => {
-    const element = document.getElementById("products");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const [isBrochureOpen, setIsBrochureOpen] = useState(false);
 
   return (
     <section id="home" className="hero-section">
@@ -46,6 +36,21 @@ const Hero = () => {
             {heroContent.heading}
           </motion.h1>
 
+          {Array.isArray(heroContent.tags) && heroContent.tags.length > 0 && (
+            <motion.div
+              className="hero-tags"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1 }}
+            >
+              {heroContent.tags.map((tag) => (
+                <span key={tag} className="hero-tag">
+                  {tag}
+                </span>
+              ))}
+            </motion.div>
+          )}
+
           <motion.p
             className="hero-description"
             initial={{ opacity: 0 }}
@@ -57,7 +62,7 @@ const Hero = () => {
 
           <motion.button
             className="btn btn-primary hero-cta"
-            onClick={scrollToProducts}
+            onClick={() => setIsBrochureOpen(true)}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1 }}
@@ -68,25 +73,7 @@ const Hero = () => {
           </motion.button>
         </motion.div>
 
-        {/* Social Media Icons */}
-        <motion.div
-          className="hero-social"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 1.2 }}
-        >
-          <a href="tel:+919548218100" className="social-icon phone-icon">
-            <FaPhone />
-          </a>
-          <a
-            href="https://wa.me/+918077288425?text=Hi,%20I%E2%80%99m%20looking%20for%20customized%20lighting%20fixtures%20for%20my%20space/project."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-icon whatsapp-icon"
-          >
-            <FaWhatsapp />
-          </a>
-        </motion.div>
+        <FloatingContactIcons />
 
         {/* Scroll Indicator */}
         <motion.div
@@ -117,6 +104,11 @@ const Hero = () => {
         <div className="bg-circle bg-circle-1"></div>
         <div className="bg-circle bg-circle-2"></div>
       </div>
+
+      <BrochureModal
+        isOpen={isBrochureOpen}
+        onClose={() => setIsBrochureOpen(false)}
+      />
     </section>
   );
 };
