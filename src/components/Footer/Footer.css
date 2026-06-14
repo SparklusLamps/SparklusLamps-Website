@@ -108,20 +108,31 @@
 .footer-contact {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
 }
 
 .footer-contact p {
   color: var(--text-secondary);
   font-size: 0.95rem;
-  line-height: 1.7;
+  line-height: 1.5;
+  margin: 0;
 }
 
 .footer-contact strong {
   color: var(--accent-gold);
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
   font-weight: 600;
+}
+
+.footer-contact-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.footer-contact-link:hover {
+  color: var(--accent-gold);
 }
 
 .footer-bottom {

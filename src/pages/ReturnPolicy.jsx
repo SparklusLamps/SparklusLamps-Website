@@ -97,7 +97,7 @@ const ReturnPolicy = () => {
             <br />
             <strong>Email:</strong> contact@sparkluslamps.com
             <br />
-            <strong>Phone:</strong> +91 9548218100
+            <strong>Phone:</strong> +91 9548559548
             <br />
             <strong>Hours:</strong> Monday - Friday, 10:00 AM - 6:00 PM IST
           </p>

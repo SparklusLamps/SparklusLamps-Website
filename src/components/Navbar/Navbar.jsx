@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
-import { navLinks } from "../../constants";
-import { useLocation } from "react-router-dom";
+import { FaWhatsapp } from "react-icons/fa";
+import { navLinks, navCta } from "../../constants";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -19,13 +20,24 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
-    }
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  const isActive = (path) => {
+    if (path === "/") return location.pathname === "/";
+    return location.pathname === path;
   };
+
+  const renderNavLink = (link) => (
+    <Link
+      to={link.path}
+      className={`nav-link ${isActive(link.path) ? "active" : ""}`}
+      onClick={() => setIsOpen(false)}
+    >
+      {link.title}
+    </Link>
+  );
 
   return (
     <motion.nav
@@ -35,64 +47,42 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="navbar-container">
-        <motion.div
-          className="navbar-logo"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.3 }}
-        >
+        <Link to="/" className="navbar-logo" onClick={() => setIsOpen(false)}>
           <span className="logo-text">Sparklus</span>
           <span className="logo-accent">Lamps</span>
-        </motion.div>
+        </Link>
 
-        {/* Desktop Menu */}
-        <ul className="navbar-menu desktop-menu">
-          {navLinks.map((link, index) => (
-            <motion.li
-              key={link.id}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <a
-                href={`/#${link.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (location.pathname === "/") {
-                    scrollToSection(link.id);
-                  } else {
-                    window.location.href = `/#${link.id}`;
-                  }
-                }}
-                className="nav-link"
+        <div className="navbar-right desktop-menu">
+          <ul className="navbar-menu">
+            {navLinks.map((link, index) => (
+              <motion.li
+                key={link.path}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.08 }}
               >
-                {link.title}
-              </a>
-            </motion.li>
-          ))}
-          <motion.li
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: navLinks.length * 0.1 }}
-          >
-            <a
-              href="/designers-architects"
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.href = "/designers-architects";
-              }}
-              className="nav-link"
-            >
-              For Designers
-            </a>
-          </motion.li>
-        </ul>
+                {renderNavLink(link)}
+              </motion.li>
+            ))}
+          </ul>
 
-        {/* Mobile Menu Toggle */}
+          <div className="navbar-actions">
+            <a
+              href={navCta.href}
+              className="nav-cta-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaWhatsapp />
+              {navCta.label}
+            </a>
+          </div>
+        </div>
+
         <div className="mobile-menu-toggle" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <HiX size={30} /> : <HiMenuAlt3 size={30} />}
         </div>
 
-        {/* Mobile Menu */}
         <motion.div
           className={`mobile-menu ${isOpen ? "open" : ""}`}
           initial={false}
@@ -102,45 +92,28 @@ const Navbar = () => {
           <ul className="navbar-menu">
             {navLinks.map((link, index) => (
               <motion.li
-                key={link.id}
+                key={link.path}
                 initial={{ opacity: 0, x: 50 }}
                 animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.08 }}
               >
-                <a
-                  href={`/#${link.id}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (location.pathname === "/") {
-                      scrollToSection(link.id);
-                    } else {
-                      window.location.href = `/#${link.id}`;
-                    }
-                  }}
-                  className="nav-link"
-                >
-                  {link.title}
-                </a>
+                {renderNavLink(link)}
               </motion.li>
             ))}
-            <motion.li
-              initial={{ opacity: 0, x: 50 }}
-              animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ delay: navLinks.length * 0.1 }}
-            >
-              <a
-                href="/designers-architects"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsOpen(false);
-                  window.location.href = "/designers-architects";
-                }}
-                className="nav-link"
-              >
-                For Designers
-              </a>
-            </motion.li>
           </ul>
+
+          <div className="navbar-actions mobile-actions">
+            <a
+              href={navCta.href}
+              className="nav-cta-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
+            >
+              <FaWhatsapp />
+              {navCta.label}
+            </a>
+          </div>
         </motion.div>
       </div>
     </motion.nav>

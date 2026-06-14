@@ -80,9 +80,9 @@ const Footer = () => {
             <div className="footer-column">
               <h3 className="footer-title">Quick Links</h3>
               <ul className="footer-links">
-                {footerLinks.quickLinks.map((link, index) => (
-                  <li key={index}>
-                    <a href={link.path}>{link.name}</a>
+                {footerLinks.quickLinks.map((link) => (
+                  <li key={link.path}>
+                    <Link to={link.path}>{link.name}</Link>
                   </li>
                 ))}
               </ul>
@@ -94,17 +94,24 @@ const Footer = () => {
               <div className="footer-contact">
                 <p>
                   <strong>Email:</strong>
-                  <br />
-                  {companyDetails.email}
+                  <a
+                    href={`mailto:${companyDetails.email}`}
+                    className="footer-contact-link"
+                  >
+                    {companyDetails.email}
+                  </a>
                 </p>
                 <p>
                   <strong>Phone:</strong>
-                  <br />
-                  {companyDetails.phone}
+                  <a
+                    href={`tel:${companyDetails.phone.replace(/\s/g, "")}`}
+                    className="footer-contact-link"
+                  >
+                    {companyDetails.phone}
+                  </a>
                 </p>
                 <p>
                   <strong>Address:</strong>
-                  <br />
                   {companyDetails.address.street}
                   <br />
                   {companyDetails.address.city}, {companyDetails.address.state}{" "}
