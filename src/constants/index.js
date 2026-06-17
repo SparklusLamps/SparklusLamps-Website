@@ -53,6 +53,25 @@ export const aboutPage = {
   },
   production: {
     heading: "From Raw Paper to Finished Light",
+    label: "Handcrafted with Care",
+    description:
+      "Every Sparklus lamp begins as raw cotton paper — folded, shaped, and transformed entirely by hand. Watch our artisans bring each piece from material to glowing finished light.",
+    videos: [
+      {
+        id: "paper-craft",
+        // Full URL, youtu.be link, /shorts/ link, or 11-char video ID
+        youtubeUrl: "https://youtube.com/shorts/Fcp8esmlaKc",
+        poster: "/images/thumbnail1.png",
+        ariaLabel: "Paper crafting process",
+      },
+      {
+        id: "finished-light",
+        youtubeUrl:
+          "https://youtube.com/shorts/mNCTNIqtK1Q?si=Qw2OLcHCDNMnePjX",
+        poster: "/images/thumbnail2.png",
+        ariaLabel: "Finished lamp coming to life",
+      },
+    ],
   },
   workshop: {
     heading: "Inside Our Workshop",
@@ -342,7 +361,7 @@ export const customizationVision = {
       step: "02",
       title: "Surface & Finish Options",
       description:
-        "Personalize every detail with curated colours, textures, and prints.",
+        "Personalize every detail with custom colours, textures, and prints.",
       image: "/images/snfoptions.png",
       layout: "image-right",
       optionsType: "color",
@@ -489,14 +508,8 @@ export const craftsmanshipVideo = {
   description:
     "From cotton paper to a beautiful lighting piece – every lamp is handcrafted by skilled artisans.",
   buttonText: "Watch the Video",
-  videoDuration: "1:15",
-  videoSrc: "/videos/craftsmanship.mp4",
-  posterImages: [
-    "/images/work1.jpg",
-    "/images/work2.jpg",
-    "/images/work3.jpg",
-    "/images/work4.jpg",
-  ],
+  youtubeUrl: "",
+  poster: "/images/work1.jpg",
 };
 
 // Collaboration Process
@@ -569,8 +582,7 @@ export const collaborationProcess = {
         "We provide installation guidance and ongoing support for a seamless experience.",
     },
   ],
-  footer:
-    "Thoughtful lighting. Handmade with care. Crafted for your vision.",
+  footer: "Thoughtful lighting. Handmade with care. Crafted for your vision.",
 };
 
 // Past Works
@@ -750,9 +762,9 @@ export const faqs = [
   },
   {
     id: 6,
-    question: "Where are Sparklus Lamps products crafted?",
+    question: "Where are your products crafted?",
     answer:
-      "Every Sparklus lamp is handcrafted in India, combining modern design with traditional paper-folding artistry. Each piece reflects hours of meticulous craftsmanship and attention to detail.",
+      "Every product is handcrafted in India, combining modern design with traditional paper-folding artistry. Each piece reflects hours of meticulous craftsmanship and attention to detail.",
   },
 ];
 
@@ -762,7 +774,7 @@ export const companyDetails = {
   email: "contact@sparkluslamps.com",
   phone: "+91 95485 59548",
   address: {
-    street: "48, Tandon Bara, Biharipur",
+    street: "48, Tandon Bara, Beharipur",
     city: "Bareilly",
     state: "Uttar Pradesh",
     zip: "243003",

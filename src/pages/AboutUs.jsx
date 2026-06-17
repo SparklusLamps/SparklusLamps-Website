@@ -133,10 +133,7 @@ const AboutUs = () => {
       </section>
 
       {/* From Raw Paper to Finished Light */}
-      <CraftsmanshipVideo
-        embedded
-        sectionHeading={production.heading}
-      />
+      <CraftsmanshipVideo embedded section={production} />
 
       {/* Workshop */}
       <section className="about-section about-section-light about-workshop">
