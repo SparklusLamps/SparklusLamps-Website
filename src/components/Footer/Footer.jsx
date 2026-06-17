@@ -65,14 +65,14 @@ const Footer = () => {
                 >
                   <FaLinkedin />
                 </a>
-                <a
+                {/* <a
                   href={companyDetails.socialMedia.pinterest}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-link"
                 >
                   <FaPinterest />
-                </a>
+                </a> */}
               </div>
             </div>
 

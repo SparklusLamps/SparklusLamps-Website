@@ -13,7 +13,267 @@
 }
 
 .craftsmanship-video-embedded::before {
-  display: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 0
+  );
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+/* Three-column production layout (About Us) */
+.production-three-col {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.85fr) minmax(0, 0.85fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.production-copy {
+  padding-right: clamp(8px, 2vw, 24px);
+}
+
+.production-label {
+  display: block;
+  color: var(--accent-gold);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.production-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.85rem, 2.8vw, 2.75rem);
+  color: var(--text-primary);
+  line-height: 1.22;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.production-heading::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 2px;
+  background: var(--accent-gold);
+  margin-top: 18px;
+}
+
+.production-description {
+  color: var(--text-secondary);
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.8;
+  margin: 0;
+  max-width: 420px;
+}
+
+.production-video-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.production-video {
+  width: 100%;
+  max-width: min(100%, 300px);
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.32);
+  background: linear-gradient(
+    145deg,
+    rgba(212, 175, 55, 0.08) 0%,
+    rgba(10, 10, 10, 0.95) 40%,
+    #0a0a0a 100%
+  );
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.42),
+    0 4px 14px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+
+.production-video:hover {
+  border-color: rgba(212, 175, 55, 0.58);
+  transform: translateY(-5px);
+  box-shadow:
+    0 26px 56px rgba(0, 0, 0, 0.48),
+    0 8px 22px rgba(0, 0, 0, 0.32),
+    0 0 36px rgba(212, 175, 55, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.production-video-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: #0a0a0a;
+  border-radius: 21px;
+}
+
+.production-video-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 22%,
+    transparent 72%,
+    rgba(0, 0, 0, 0.22) 100%
+  );
+  transition: opacity 0.3s ease;
+}
+
+.production-video-inner.is-active::before {
+  opacity: 0;
+}
+
+.production-video-iframe {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.production-video-placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%);
+}
+
+.production-video-missing {
+  position: absolute;
+  bottom: 14%;
+  left: 50%;
+  z-index: 4;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0 12px;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  pointer-events: none;
+}
+
+.production-video-play:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.production-video-poster,
+.production-video-element {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.production-video-poster {
+  z-index: 1;
+  transition: opacity 0.35s ease;
+}
+
+.production-video-element {
+  z-index: 0;
+}
+
+.production-video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(212, 175, 55, 0.6);
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--accent-gold);
+  font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding-left: 4px;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.production-video-inner.has-poster .production-video-play {
+  opacity: 1;
+}
+
+.production-video-inner.is-playing .production-video-play {
+  opacity: 0;
+}
+
+.production-video-inner.is-playing:hover .production-video-play,
+.production-video-inner.is-playing:focus-within .production-video-play {
+  opacity: 1;
+}
+
+.production-video-inner:hover .production-video-play,
+.production-video-play:focus-visible {
+  opacity: 1;
+}
+
+.production-video-play:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.72);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.player-youtube-iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.player-youtube-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.player-youtube-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--card-bg);
+}
+
+.player-play-overlay:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.craftsmanship-cta:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .craftsmanship-section-title {
@@ -260,6 +520,37 @@
 }
 
 @media (max-width: 1024px) {
+  .production-three-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 24px;
+  }
+
+  .production-copy {
+    grid-column: 1 / -1;
+    padding-right: 0;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .production-heading::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .production-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .production-video {
+    max-width: min(100%, 260px);
+  }
+
+  .production-video-play {
+    opacity: 1;
+  }
+
   .craftsmanship-grid {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -281,6 +572,31 @@
 }
 
 @media (max-width: 768px) {
+  .production-three-col {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .production-copy {
+    grid-column: auto;
+  }
+
+  .production-video-col {
+    width: 100%;
+  }
+
+  .production-video {
+    max-width: min(100%, 340px);
+    margin: 0 auto;
+  }
+
+  .production-video-play {
+    opacity: 1;
+    width: 76px;
+    height: 76px;
+    font-size: 1.45rem;
+  }
+
   .craftsmanship-video-section {
     padding: 50px 5%;
   }

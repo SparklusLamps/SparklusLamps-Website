@@ -1,123 +1,150 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { FaPlay, FaVolumeUp, FaExpand } from "react-icons/fa";
+import { FaPlay } from "react-icons/fa";
 import { craftsmanshipVideo } from "../../constants";
+import {
+  getYouTubeVideoId,
+  getYouTubeEmbedUrl,
+  getYouTubeThumbnail,
+} from "../../utils/youtube";
 import "./CraftsmanshipVideo.css";
 
-const formatTime = (seconds) => {
-  if (!seconds || Number.isNaN(seconds)) return "0:00";
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, "0")}`;
+const VerticalVideo = ({ youtubeUrl, youtubeId, poster, ariaLabel, title }) => {
+  const videoId = youtubeId || getYouTubeVideoId(youtubeUrl);
+  const [isActive, setIsActive] = useState(false);
+  const thumbnail = poster || (videoId ? getYouTubeThumbnail(videoId) : null);
+
+  return (
+    <div className="production-video">
+      <div
+        className={`production-video-inner${
+          isActive ? " is-active" : " has-poster"
+        }`}
+      >
+        {isActive && videoId ? (
+          <iframe
+            className="production-video-iframe"
+            src={getYouTubeEmbedUrl(videoId, { autoplay: true })}
+            title={ariaLabel || title || "YouTube video"}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        ) : (
+          <>
+            {thumbnail ? (
+              <img
+                className="production-video-poster"
+                src={thumbnail}
+                alt=""
+                aria-hidden="true"
+              />
+            ) : (
+              <div className="production-video-placeholder" aria-hidden="true" />
+            )}
+
+            <button
+              type="button"
+              className="production-video-play"
+              onClick={() => videoId && setIsActive(true)}
+              disabled={!videoId}
+              aria-label={
+                videoId ? "Play video" : "YouTube video link not configured"
+              }
+            >
+              <FaPlay />
+            </button>
+
+            {!videoId && (
+              <p className="production-video-missing">
+                Add a YouTube link in constants
+              </p>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
 };
 
-const CraftsmanshipVideo = ({ embedded = false, sectionHeading = "" }) => {
+const EmbeddedProductionSection = ({ section }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [showPoster, setShowPoster] = useState(true);
-
-  const {
-    label,
-    title,
-    description,
-    buttonText,
-    videoDuration,
-    videoSrc,
-    posterImages,
-  } = craftsmanshipVideo;
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleTimeUpdate = () => setCurrentTime(video.currentTime);
-    const handleLoadedMetadata = () => setDuration(video.duration);
-    const handleEnded = () => {
-      setIsPlaying(false);
-      setShowPoster(true);
-    };
-    const handlePlay = () => {
-      setIsPlaying(true);
-      setShowPoster(false);
-    };
-    const handlePause = () => setIsPlaying(false);
-
-    video.addEventListener("timeupdate", handleTimeUpdate);
-    video.addEventListener("loadedmetadata", handleLoadedMetadata);
-    video.addEventListener("ended", handleEnded);
-    video.addEventListener("play", handlePlay);
-    video.addEventListener("pause", handlePause);
-
-    return () => {
-      video.removeEventListener("timeupdate", handleTimeUpdate);
-      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
-      video.removeEventListener("ended", handleEnded);
-      video.removeEventListener("play", handlePlay);
-      video.removeEventListener("pause", handlePause);
-    };
-  }, []);
-
-  const handlePlay = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    setShowPoster(false);
-    video.play();
-  };
-
-  const handleProgressClick = (e) => {
-    const video = videoRef.current;
-    if (!video || !duration) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const ratio = (e.clientX - rect.left) / rect.width;
-    video.currentTime = ratio * duration;
-  };
-
-  const handleFullscreen = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.requestFullscreen) {
-      video.requestFullscreen();
-    }
-  };
-
-  const progress = duration ? (currentTime / duration) * 100 : 0;
-  const displayDuration = duration ? formatTime(duration) : videoDuration;
-
-  const sectionClass = embedded
-    ? "craftsmanship-video-section craftsmanship-video-embedded"
-    : "craftsmanship-video-section";
+  const { heading, label, description, videos } = section;
 
   return (
     <section
-      className={sectionClass}
-      id={embedded ? "production" : "craftsmanship"}
+      className="craftsmanship-video-section craftsmanship-video-embedded"
+      id="production"
     >
       <div className="container">
-        {embedded && sectionHeading && (
-          <motion.div
-            className="section-title craftsmanship-section-title"
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <h2>{sectionHeading}</h2>
-          </motion.div>
-        )}
+        <motion.div
+          ref={ref}
+          className="production-three-col"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="production-copy">
+            <span className="production-label">{label}</span>
+            <h2 className="production-heading">{heading}</h2>
+            <p className="production-description">{description}</p>
+          </div>
 
+          {videos.map((video, index) => (
+            <motion.div
+              key={video.id}
+              className="production-video-col"
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.12 + index * 0.1 }}
+            >
+              <VerticalVideo
+                youtubeUrl={video.youtubeUrl}
+                youtubeId={video.youtubeId}
+                poster={video.poster}
+                ariaLabel={video.ariaLabel}
+                title={video.title}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const StandaloneCraftsmanshipVideo = () => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const { label, title, description, buttonText, youtubeUrl, youtubeId, poster } =
+    craftsmanshipVideo;
+
+  const videoId = youtubeId || getYouTubeVideoId(youtubeUrl);
+  const [isActive, setIsActive] = useState(false);
+  const thumbnail =
+    poster || (videoId ? getYouTubeThumbnail(videoId) : null);
+
+  const handlePlay = () => {
+    if (videoId) setIsActive(true);
+  };
+
+  return (
+    <section className="craftsmanship-video-section" id="craftsmanship">
+      <div className="container">
         <motion.div
           ref={ref}
           className="craftsmanship-grid"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: embedded ? 0.1 : 0 }}
+          transition={{ duration: 0.6 }}
         >
           <div className="craftsmanship-content">
             <span className="craftsmanship-label">{label}</span>
@@ -127,6 +154,7 @@ const CraftsmanshipVideo = ({ embedded = false, sectionHeading = "" }) => {
               type="button"
               className="craftsmanship-cta"
               onClick={handlePlay}
+              disabled={!videoId}
             >
               {buttonText}
               <span className="cta-play-icon">
@@ -136,82 +164,58 @@ const CraftsmanshipVideo = ({ embedded = false, sectionHeading = "" }) => {
           </div>
 
           <div className="craftsmanship-player">
-            <div className="player-frame">
-              {showPoster && (
-                <div className="player-poster">
-                  <div className="poster-collage">
-                    {posterImages.map((image, index) => (
-                      <img
-                        key={image}
-                        src={image}
-                        alt={`Craftsmanship step ${index + 1}`}
-                      />
-                    ))}
-                  </div>
-                </div>
+            <div
+              className={`player-frame${isActive ? " is-active" : ""}${
+                !isActive && thumbnail ? " has-poster" : ""
+              }`}
+            >
+              {isActive && videoId ? (
+                <iframe
+                  className="player-youtube-iframe"
+                  src={getYouTubeEmbedUrl(videoId, { autoplay: true })}
+                  title={title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              ) : (
+                <>
+                  {thumbnail ? (
+                    <img
+                      className="player-youtube-poster"
+                      src={thumbnail}
+                      alt=""
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <div className="player-youtube-placeholder" aria-hidden="true" />
+                  )}
+
+                  <button
+                    type="button"
+                    className="player-play-overlay"
+                    onClick={handlePlay}
+                    disabled={!videoId}
+                    aria-label={videoId ? "Play video" : "YouTube link not configured"}
+                  >
+                    <FaPlay />
+                  </button>
+                </>
               )}
-
-              <video
-                ref={videoRef}
-                className="player-video"
-                src={videoSrc}
-                playsInline
-                preload="metadata"
-              />
-
-              {!isPlaying && (
-                <button
-                  type="button"
-                  className="player-play-overlay"
-                  onClick={handlePlay}
-                  aria-label="Play video"
-                >
-                  <FaPlay />
-                </button>
-              )}
-
-              <div className="player-controls">
-                <span className="control-time">{formatTime(currentTime)}</span>
-                <div
-                  className="control-progress"
-                  onClick={handleProgressClick}
-                  role="progressbar"
-                  aria-valuenow={progress}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                >
-                  <div
-                    className="control-progress-fill"
-                    style={{ width: `${progress}%` }}
-                  />
-                  <span
-                    className="control-progress-thumb"
-                    style={{ left: `${progress}%` }}
-                  />
-                </div>
-                <span className="control-duration">{displayDuration}</span>
-                <button
-                  type="button"
-                  className="control-icon-btn"
-                  aria-label="Volume"
-                >
-                  <FaVolumeUp />
-                </button>
-                <button
-                  type="button"
-                  className="control-icon-btn"
-                  onClick={handleFullscreen}
-                  aria-label="Fullscreen"
-                >
-                  <FaExpand />
-                </button>
-              </div>
             </div>
           </div>
         </motion.div>
       </div>
     </section>
   );
+};
+
+const CraftsmanshipVideo = ({ embedded = false, section = null }) => {
+  if (embedded && section) {
+    return <EmbeddedProductionSection section={section} />;
+  }
+
+  return <StandaloneCraftsmanshipVideo />;
 };
 
 export default CraftsmanshipVideo;
