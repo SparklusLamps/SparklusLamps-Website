@@ -52,7 +52,7 @@ export const aboutPage = {
     founderTitle: "Founder",
   },
   production: {
-    heading: "From Raw Paper to Finished Light",
+    heading: "From Cotton Cloth to Finished Light",
     label: "Handcrafted with Care",
     description:
       "Every Sparklus lamp begins as raw cotton paper — folded, shaped, and transformed entirely by hand. Watch our artisans bring each piece from material to glowing finished light.",
@@ -593,9 +593,9 @@ export const pastWorks = [
     location: "Hyderabad, India",
     description: "Waterfront property with custom LED ambience lighting",
     clientRequirements:
-      "A statement pendant for a waterfront living room with warm ambient light, sculptural form, and a scale that anchors the double-height ceiling without overpowering the view.",
+      "The client wanted to create a warm and relaxing environment for evening use, movie nights, and unwinding after work. Traditional lighting options felt harsh and lacked character.",
     ourSolution:
-      "We crafted the Twisted OriFold in handmade paper with integrated LED diffusion, custom sizing for the ceiling height, and a soft gold interior wash to complement the waterfront palette.",
+      "We designed a custom suspended origami lighting sculpture inspired by flowing organic forms. Handmade paper modules were engineered into a continuous wave-like structure and illuminated using integrated LED strips. Multiple suspension points were strategically placed to maintain the dynamic form while keeping the fixture lightweight. The result is a dramatic architectural centerpiece that creates warmth, movement, and visual interest throughout the space.",
     image: "/images/work4.png",
     year: "2024",
   },
@@ -606,9 +606,9 @@ export const pastWorks = [
     description:
       "Luxury chandelier installation featuring custom crystal designs",
     clientRequirements:
-      "A dramatic cluster installation for a luxury residence foyer — multiple drops, jewel-like highlights, and a layout that fills vertical volume while staying refined.",
+      "The client wanted a modern ceiling light that would complement a luxury interior while providing soft ambient illumination. The challenge was to create a decorative fixture that felt elegant without overpowering the room.",
     ourSolution:
-      "Falling Stars was built as a multi-drop cotton paper composition with layered silhouettes, bespoke drop lengths, and warm LED placement to create depth and movement in the entry.",
+      "We developed a custom handmade paper chandelier composed of repeating curved modules arranged in a circular composition. Integrated LED lighting softly illuminates the paper surfaces, creating a warm glow and intricate shadow patterns. The design delivers both functional lighting and a refined sculptural presence that enhances the ceiling architecture.",
     image: "/images/w1.jpg",
     year: "2024",
   },
@@ -619,22 +619,22 @@ export const pastWorks = [
     description:
       "Designed to soften your space, the Solace Dome Lamp features a sculptural dome silhouette handcrafted from cotton paper",
     clientRequirements:
-      "Soft, diffused lighting for a contemporary bedroom retreat — minimal visual weight, calming glow, and a dome form that feels sculptural yet quiet.",
+      "The client wanted to create a warm and relaxing environment for evening use, movie nights, and unwinding after work. Traditional lighting options felt harsh and lacked character.",
     ourSolution:
-      "The Solace Dome was hand-formed in cotton paper with a wide diffusion profile, custom diameter for the bedside zone, and a muted finish to soften the room without glare.",
+      "We designed a handcrafted table lamp using sustainable handmade paper to diffuse light softly throughout the room. The organic silhouette and warm illumination create a cozy atmosphere while serving as a decorative accent. The lamp transforms the space into a calming retreat and enhances the overall mood of the interior.",
     image: "/images/work2.jpg",
     year: "2023",
   },
   {
     id: 4,
-    title: "the Bends",
+    title: "The Bends",
     location: "Lucknow, India",
     description: "Bespoke theatrical lighting installation",
     clientRequirements:
-      "Expressive, directional lighting for a hospitality lounge — bold curves, theatrical presence, and finishes that hold up to evening service.",
+      "The client sought a distinctive lighting solution for their creative workspace that would reflect innovation and design thinking. The fixture needed to improve the ambience while acting as a conversation piece for visitors and clients.",
     ourSolution:
-      "the Bends combines folded paper geometry with targeted LED accents, custom bend radii for the ceiling run, and a durable finish suited to high-traffic hospitality use.",
-    image: "/images/work3.jpg",
+      "We created a custom suspended origami lighting installation spanning the length of the workspace. The handcrafted paper structure introduces movement and texture while integrated lighting provides a warm, comfortable environment. The installation reinforces the brand identity of the space and creates a memorable experience for everyone entering the office.",
+    image: "/images/work3.png",
     year: "2023",
   },
 ];
